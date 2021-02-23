@@ -1,4 +1,4 @@
-header class="mb-4">
+<header class="mb-4">
     <nav class="navbar navbar-expand-sm navbar-dark aqua-gradient">
         {{-- トップページへのリンク --}}
         <a class="navbar-brand" href="/"><i class=""></i>マッチングアプリ</a>
@@ -15,21 +15,21 @@ header class="mb-4">
                         <span class="nav-link">ようこそ、 {{ Auth::user()->name }}さん</span>
                     </li>
                     {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('', 'ユーザー詳細', ['id' => Auth::user()->id], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item"></li>
                     {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('', 'ユーザーshow', ['id' => Auth::user()->id], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item"></li>
                     
                     {{-- ログアウトへのリンク --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('') }}">ログアウト</a>
+                        <a class="nav-link" href="">ログアウト</a>
                     </li>
                     
                 @else
                     
                     {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('', '新規登録', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item"></li>
                     {{-- ログインページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item"></li>
                 @endif
             </ul>
         </div>
