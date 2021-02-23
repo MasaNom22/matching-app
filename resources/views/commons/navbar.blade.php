@@ -21,15 +21,14 @@
                     
                     {{-- ログアウトへのリンク --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="">ログアウト</a>
+                        <a class="nav-link" href="{{ route('logout.get') }}">ログアウト</a>
                     </li>
                     
                 @else
                     
-                    {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item"></li>
+                    <li class="nav-item">{!! link_to_route('signup.get', '新規登録', [], ['class' => 'nav-link']) !!}</li>
                     {{-- ログインページへのリンク --}}
-                    <li class="nav-item"></li>
+                    <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
                 @endif
             </ul>
         </div>
