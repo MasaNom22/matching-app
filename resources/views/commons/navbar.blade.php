@@ -26,7 +26,7 @@
                             {{-- ページへのリンク --}}
                             <li class="dropdown-item"></li>
                             {{-- ページへのリンク --}}
-                            <li class="dropdown-item"></li>
+                            <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細画面', ['id' => Auth::user()->id]) !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
