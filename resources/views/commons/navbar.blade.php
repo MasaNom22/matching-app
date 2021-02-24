@@ -16,13 +16,23 @@
                     </li>
                     {{-- ユーザ登録ページへのリンク --}}
                     <li class="nav-item"></li>
-                    {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item"></li>
-                    
-                    {{-- ログアウトへのリンク --}}
+                    {{-- 画像投稿ページへのリンク --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout.get') }}">ログアウト</a>
+                        <a class="nav-link" href="{{ route('upload_form') }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>現場写真投稿</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            {{-- ページへのリンク --}}
+                            <li class="dropdown-item"></li>
+                            {{-- ページへのリンク --}}
+                            <li class="dropdown-item"></li>
+                            <li class="dropdown-divider"></li>
+                            {{-- ログアウトへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+                        </ul>
+                    </li>
+                    
                     
                 @else
                     

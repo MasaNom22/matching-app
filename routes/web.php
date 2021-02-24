@@ -24,3 +24,12 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+//画像投稿画面
+Route::get('/form', 'UploadImageController@show')->name("upload_form");
+//画像アップロード
+Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
+//ユーザー詳細画面
+Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
+    Route::get('index/{id}', 'UserController@index')->name('users.index');
+});
