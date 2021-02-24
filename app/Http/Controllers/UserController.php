@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\UploadImage;
+
+use App\User;
+
 class UserController extends Controller
 {
     /**
@@ -47,10 +51,14 @@ class UserController extends Controller
     {
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
+        $user_id = $id;
+        //アップロードした画像を取得
+		$upload = UploadImage::find($user_id);
 
         // ユーザ詳細ビューでそれを表示
         return view('users.show', [
             'user' => $user,
+            "image" => $upload,
         ]);
     }
 

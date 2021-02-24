@@ -31,6 +31,6 @@ Route::get('/form', 'UploadImageController@show')->name("upload_form");
 Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
 //ユーザー詳細画面
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
-    Route::get('show/{id}', 'UserController@index')->name('users.show');
+    Route::get('show/{id}', 'UserController@show')->name('users.show');
 });
 
