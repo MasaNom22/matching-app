@@ -29,8 +29,13 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::get('/form', 'UploadImageController@show')->name("upload_form");
 //画像アップロード
 Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
-//ユーザー詳細画面
+//ユーザー関係
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
+    //ユーザー詳細画面
     Route::get('show/{id}', 'UserController@show')->name('users.show');
+    //ユーザー編集画面
+    Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
+    //ユーザー更新
+    Route::patch('update/{id}', 'UserController@update')->name('users.update');
 });
 

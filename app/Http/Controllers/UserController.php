@@ -70,7 +70,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user_id = $id;
+        //アップロードした画像を取得
+		$upload = UploadImage::find($user_id);
+
+        return view('users.edit', [
+            'user' => $user,
+            "image" => $upload,
+        ]); 
     }
 
     /**
@@ -82,7 +90,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      //ユーザーを特定
+      $user = User::find($id);
+      $user_id = $id;
+      //アップロードした画像を取得
+	  $upload = UploadImage::find($user_id);
+      //ユーザーの上書き
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->age = $request->age;
+      $user->save();
+        return redirect()->route('users.show', [
+            'user' => $user,
+            "image" => $upload,
+            'id' => $user->id,
+        ]);
     }
 
     /**
