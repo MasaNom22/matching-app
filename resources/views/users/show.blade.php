@@ -8,7 +8,7 @@
     <div class=row>
         <div class="col-md-4">
           <div>
-              //php artisan storage:linkが必要
+            <!-- php artisan storage:linkが必要-->  
             <img src="{{ Storage::url($image->file_path) }}" style="width:100%;"　alt="写真"/>
           </div>
           
