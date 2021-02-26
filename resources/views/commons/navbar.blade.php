@@ -35,7 +35,9 @@
                     
                     
                 @else
-                    
+                    {{-- ゲストログインへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('login.guest', 'ゲストログイン', [], ['class' => 'nav-link']) !!}</li>
+                    {{-- 新規登録ページへのリンク --}}
                     <li class="nav-item">{!! link_to_route('signup.get', '新規登録', [], ['class' => 'nav-link']) !!}</li>
                     {{-- ログインページへのリンク --}}
                     <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
