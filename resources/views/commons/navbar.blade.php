@@ -20,6 +20,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('upload_form') }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>現場写真投稿</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">

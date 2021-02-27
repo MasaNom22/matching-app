@@ -40,4 +40,6 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //ユーザー更新
     Route::patch('update/{id}', 'UserController@update')->name('users.update');
 });
+//コメント投稿画面表示
+Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 
