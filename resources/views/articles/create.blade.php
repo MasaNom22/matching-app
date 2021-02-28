@@ -15,8 +15,8 @@
             </div>
 
             <div class="card-text">
-              <!-- 通常投稿のフォーム -->
-              <form id="nomal-post" method="POST" class="w-75 mx-auto" >
+              <!-- 投稿のフォーム -->
+              <form id="nomal-post" method="POST" class="w-75 mx-auto" action="{{ route('articles.store') }}">
 
                 @csrf
                 <div class="form-group">

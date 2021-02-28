@@ -45,4 +45,9 @@ class User extends Authenticatable
         // return $this->hasMany(UploadImage::class);
         return $this->hasOne(UploadImage::class);
     }
+    
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }
