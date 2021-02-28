@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::group(['middleware' => 'auth'], function() {
+Route::get('/', 'ArticleController@index')->name('articles.index');
 });
-// Route::get('/', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 
 
 // ユーザ登録
