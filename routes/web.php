@@ -48,4 +48,6 @@ Route::get('/articles/index', 'ArticleController@index')->name('articles.index')
 Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 //コメント投稿機能
 Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
+//コメント編集機能
+Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
 
