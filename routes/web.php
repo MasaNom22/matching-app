@@ -52,4 +52,6 @@ Route::post('/articles/store', 'ArticleController@store')->name('articles.store'
 Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
 //ユーザー更新
 Route::patch('/articles/update/{id}', 'ArticleController@update')->name('articles.update');
+//コメント削除
+Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
 

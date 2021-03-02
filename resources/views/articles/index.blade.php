@@ -32,9 +32,9 @@
                               <i class="fas fa-pen mr-1"></i>投稿を編集する
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $article->id }}">
-                              <i class="fas fa-trash-alt mr-1"></i>投稿を削除する
-                            </a>
+                            {!! Form::model($article, ['route' => ['articles.destroy', $article->id], 'method' => 'delete']) !!}
+                            {!! Form::submit('投稿を削除する', ['class' => 'dropdown-item text-danger ']) !!}
+                            {!! Form::close() !!}
                           </div>
                         </div>
                       </div>

@@ -66,8 +66,14 @@ class ArticleController extends Controller
     	$article->body = $request->body;
         $article->save();
         
-    	// session()->flash('flashmessage', '変更が完了しました');
         return redirect()->route('articles.index');
         
     }
+    
+    function destroy($id){
+		$deleteArticle = Article::find($id);
+		$deleteArticle->delete();
+	
+		return redirect()->route('articles.index');
+	}
 }
