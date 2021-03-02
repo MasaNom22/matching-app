@@ -11,7 +11,7 @@
           <div class="card-body pt-3">
 
             <div class="card-text">
-              <form method="POST" class="w-75 mx-auto" action="">
+              <form method="POST" class="w-75 mx-auto" action="{{ route('articles.update', ['id' => $article->id]) }}">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">

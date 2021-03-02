@@ -56,4 +56,18 @@ class ArticleController extends Controller
             'article' => $article,
         ]);
     }
+    
+     public function update($id, Request $request)
+    {
+        $article = Article::find($id);
+    	$request->validate([
+    		'body' => 'required',
+		]);
+    	$article->body = $request->body;
+        $article->save();
+        
+    	// session()->flash('flashmessage', '変更が完了しました');
+        return redirect()->route('articles.index');
+        
+    }
 }

@@ -50,4 +50,6 @@ Route::get('/articles/create', 'ArticleController@create')->name('articles.creat
 Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
 //コメント編集機能
 Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
+//ユーザー更新
+Route::patch('/articles/update/{id}', 'ArticleController@update')->name('articles.update');
 
