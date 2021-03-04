@@ -7,11 +7,12 @@
 <div class=container>
     <div class=row>
         <div class="col-md-4">
+        @if(isset($image))
           <div>
             <!-- php artisan storage:linkが必要-->  
             <img src="{{ Storage::url($image->file_path) }}" style="width:100%;"　alt="写真"/>
           </div>
-          
+         @else
         </div>
     
 
@@ -23,6 +24,7 @@
             {!! Form::model($user, ['route' => ['users.edit', $user->id], 'method' => 'get']) !!}
             {!! Form::submit('編集', ['class' => 'btn btn-success btn-sm']) !!}
             {!! Form::close() !!}
+            @endif
         </div>
     </div>
 </div>
