@@ -18,6 +18,20 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'gender', 'age'
     ];
+    
+    const GENDER = [
+        'male' => [ 'label' => '男' ],
+        'female' => [ 'label' => '女' ],
+    ];
+    
+    public function getGenderLabelAttribute()
+    {
+        // 状態値
+        $gender = $this->attributes['gender'];
+
+
+        return self::GENDER[$gender]['label'];
+    }
 
     /**
      * The attributes that should be hidden for arrays.
