@@ -14,6 +14,7 @@
               <form method="POST" action="/users/update/{{ $user->id }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
+                @if(isset($image))
                 <div class="form-group text-center">
                   <label for="profile_image">
                     <p class="mb-1">プロフィール画像</p>
@@ -21,7 +22,8 @@
                     
                   </label>
                 </div>
-                
+                @else
+                @endif
                 <div class="form-group">
                   <label for="name">ユーザー名</label>
                     <input class="form-control" type="text" id="name" name="name" value="{{ $user->name ?? old('name') }}">
