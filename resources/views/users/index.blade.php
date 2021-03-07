@@ -3,6 +3,7 @@
 @section('title', 'ユーザ一覧画面')
 
 @section('content')
+<h2>ユーザー一覧画面</h2>
 
 <div class=container>
     <div class=row>
