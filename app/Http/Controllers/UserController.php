@@ -120,4 +120,27 @@ class UserController extends Controller
     {
         //
     }
+    
+     public function follow($id)
+    {
+        // 認証済みユーザ（閲覧者）が、 idのユーザをフォローする
+        \Auth::user()->follow($id);
+        // 前のURLへリダイレクトさせる
+        // return back();
+        $users=User::All();
+        return view('users.index', [
+            "users" => $users,
+            ]);
+    }
+    public function unfollow($id)
+    {
+        // 認証済みユーザ（閲覧者）が、 idのユーザをアンフォローする
+        \Auth::user()->unfollow($id);
+        // 前のURLへリダイレクトさせる
+        // return back();
+        $users=User::All();
+        return view('users.index', [
+            "users" => $users,
+            ]);
+    }
 }

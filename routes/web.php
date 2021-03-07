@@ -43,6 +43,10 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
     //ユーザー更新
     Route::patch('update/{id}', 'UserController@update')->name('users.update');
+    //ユーザーをフォロー
+    Route::post('follow/{id}', 'UserController@follow')->name('users.follow');
+    //ユーザーをアンフォロー
+    Route::delete('unfollow/{id}', 'UserController@unfollow')->name('users.unfollow');
 });
 //コメント表示画面
 Route::get('/articles/index', 'ArticleController@index')->name('articles.index');

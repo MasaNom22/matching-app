@@ -15,6 +15,19 @@
 	        <img src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
             @else
             @endif
+            @if (Auth::id() != $user->id)
+                @if (Auth::user()->is_following($user->id))
+                    {{-- アンフォローボタンのフォーム --}}
+                    {!! Form::open(['route' => ['users.unfollow', $user->id], 'method' => 'delete']) !!}
+                        {!! Form::submit('フォローを外す', ['class' => "btn btn-primary btn-block"]) !!}
+                    {!! Form::close() !!}
+                @else
+                    {{-- フォローボタンのフォーム --}}
+                    {!! Form::open(['route' => ['users.follow', $user->id]]) !!}
+                        {!! Form::submit('フォローする', ['class' => "btn btn-primary btn-block"]) !!}
+                    {!! Form::close() !!}
+                @endif
+            @endif
         </div>
         @endforeach
     </div>
