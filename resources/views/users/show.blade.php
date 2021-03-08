@@ -14,8 +14,12 @@
           </div>
          @else
          @endif
+          {{-- フォローユーザー確認フォーム --}}
+            {!! Form::model($user, ['route' => ['users.followings', $user->id], 'method' => 'get']) !!}
+            {!! Form::submit('フォローユーザー確認', ['class' => 'btn btn-success btn-sm']) !!}
+            {!! Form::close() !!}
         </div>
-    
+   
 
         <div class=" col-md-8">
             <h4>名前: {{ $user->name }}</h4>

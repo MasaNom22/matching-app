@@ -47,6 +47,8 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::post('follow/{id}', 'UserController@follow')->name('users.follow');
     //ユーザーをアンフォロー
     Route::delete('unfollow/{id}', 'UserController@unfollow')->name('users.unfollow');
+    //フォローユーザー確認
+    Route::get('followings/{id}', 'UserController@followings')->name('users.followings');
 });
 //コメント表示画面
 Route::get('/articles/index', 'ArticleController@index')->name('articles.index');

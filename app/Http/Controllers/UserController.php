@@ -143,4 +143,18 @@ class UserController extends Controller
             "users" => $users,
             ]);
     }
+    
+     public function followings($id)
+    {
+        $user = User::findOrFail($id);
+
+        // ユーザのフォローユーザーを取得
+        $followings = $user->followings()->get();
+
+        // フォロー一覧ビューでそれらを表示
+        return view('users.followings', [
+            'user' => $user,
+            'users' => $followings,
+        ]);
+    }
 }
