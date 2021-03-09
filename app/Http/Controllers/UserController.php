@@ -151,10 +151,22 @@ class UserController extends Controller
         // ユーザのフォローユーザーを取得
         $followings = $user->followings()->get();
 
-        // フォロー一覧ビューでそれらを表示
         return view('users.followings', [
             'user' => $user,
             'users' => $followings,
+        ]);
+    }
+    
+    public function followers($id)
+    {
+        $user = User::findOrFail($id);
+
+        // ユーザのフォロワーを取得
+        $followers = $user->followers()->get();
+
+        return view('users.followers', [
+            'user' => $user,
+            'users' => $followers,
         ]);
     }
 }

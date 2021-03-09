@@ -18,6 +18,10 @@
             {!! Form::model($user, ['route' => ['users.followings', $user->id], 'method' => 'get']) !!}
             {!! Form::submit('フォローユーザー確認', ['class' => 'btn btn-success btn-sm']) !!}
             {!! Form::close() !!}
+            {{-- フォロワー確認フォーム --}}
+            {!! Form::model($user, ['route' => ['users.followers', $user->id], 'method' => 'get']) !!}
+            {!! Form::submit('フォロワー確認', ['class' => 'btn btn-success btn-sm']) !!}
+            {!! Form::close() !!}
         </div>
    
 
