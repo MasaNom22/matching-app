@@ -162,6 +162,8 @@ class UserController extends Controller
     public function followers($id)
     {
         $user = User::findOrFail($id);
+        // ユーザのフォロワーをカウント
+        $user->loadCount('followers');
 
         // ユーザのフォロワーを取得
         $followers = $user->followers()->get();
