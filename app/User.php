@@ -69,11 +69,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id')->withTimestamps();
     }
-    //フォロー数
-    public function getCountFollowersAttribute()
-    {
-        return $this->followings->count();
-    }
+
     //ユーザーにフォローされているフォロワー
     public function followers()
     {

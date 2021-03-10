@@ -3,10 +3,14 @@
 @section('title', 'フォローユーザ一覧画面')
 
 @section('content')
-<h2>フォローユーザー一覧画面</h2>
+        <div>
+        <h2>フォローユーザー一覧画面</h2>
+        <h2>{{ $user->name}}さんのフォローユーザー数：{{ $user->followings_count }}名</h2>
+        </div>
 
 <div class=container>
     <div class=row>
+
         @foreach($users as $user)
         <div style="" class="col-md-3 mt-4 mb-4">
             <h4>名前: {{ $user->name }}</h4>
@@ -31,6 +35,9 @@
             @endif
         </div>
         @endforeach
+        <div style="" class="col-md-3 mt-4 mb-4">
+
+        </div>
     </div>
 </div>
 @endsection

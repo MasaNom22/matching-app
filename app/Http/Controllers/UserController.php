@@ -147,9 +147,11 @@ class UserController extends Controller
      public function followings($id)
     {
         $user = User::findOrFail($id);
-
+        // ユーザのフォローユーザーをカウント
+        $user->loadCount('followings');
         // ユーザのフォローユーザーを取得
         $followings = $user->followings()->get();
+        
 
         return view('users.followings', [
             'user' => $user,
