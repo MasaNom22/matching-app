@@ -22,6 +22,7 @@
                     	        <h5>名前: {{ $article->user->name }}</h5>
                     	  　</div>
                 	  　<!-- dropdown -->
+                	  　@if ($article->user_id == Auth::id())
                       <div class="col-1 card-text">
                         <div class="dropdown text-center">
                           <a class="in-link p-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,6 +40,7 @@
                         </div>
                       </div>
                       <!-- dropdown -->
+                      @endif
                 	  </div>　
             	    </div>
                 </div>
