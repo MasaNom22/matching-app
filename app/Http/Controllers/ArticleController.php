@@ -17,11 +17,10 @@ class ArticleController extends Controller
      public function index()
     {
         // 認証済みユーザを取得
-        $user = \Auth::user();
+        // $user = \Auth::user();
 		//UserモデルにArticleモデルとの関係を書く
-// 		$articles = $user->articles()->orderBy('created_at', 'desc')->paginate(5);
-	    $articles = Article::all();
-        
+        //$articles = $user->articles()->orderBy('created_at', 'desc')->paginate(5);
+	    $articles = Article::all()->sortByDesc('created_at');
         // タスク一覧ビューでそれを表示
         return view('articles.index', [
             'articles' => $articles,

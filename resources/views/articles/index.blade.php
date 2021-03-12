@@ -18,8 +18,9 @@
                             <div class="col-2"></div>
                             <div style="" class="col-8">
                                 <h4>コメント: {{ $article->body }}</h4>
-                    	        <h5>id: {{ $article->user_id }}</h5>
+                    	        <h6>投稿日時: {{ $article->created_at }}</h6>
                     	        <h5>名前: {{ $article->user->name }}</h5>
+                    	        
                     	  　</div>
                 	  　<!-- dropdown -->
                 	  　@if ($article->user_id == Auth::id())
