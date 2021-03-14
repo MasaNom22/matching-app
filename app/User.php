@@ -76,6 +76,46 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id')->withTimestamps();
     }
     
+    public function likes()
+    {
+        return $this->belongsToMany(Article::class, 'likes', 'user_id', 'article_id')->withTimestamps();
+    }
+    
+    public function like($id)
+    {
+        // すでにlikeしているかの確認
+        $exist = $this->is_liking($id);
+
+        if ($exist) {
+            // すでにlikeしていれば何もしない
+            return false;
+        } else {
+            $this->likes()->attach($id);
+            return true;
+        }
+    }
+    
+    public function unlike($id)
+    {
+        // すでにlikeしているかの確認
+        $exist = $this->is_liking($id);
+        
+        if ($exist) {
+            // すでにlikeしていればlikeeを外す
+            $this->likes()->detach($id);
+            return true;
+        } else {
+            // 未likeであれば何もしない
+            return false;
+        }
+    }
+    
+    public function is_liking($id)
+    {
+        return $this->likes()->where('article_id', $id)->exists();
+    }
+
+    
     public function follow($id)
     {
         // すでにフォローしているかの確認

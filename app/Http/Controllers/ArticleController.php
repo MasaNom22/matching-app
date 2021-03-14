@@ -76,4 +76,18 @@ class ArticleController extends Controller
 	
 		return redirect()->route('articles.index');
 	}
+	
+	public function like($id)
+    {
+         \Auth::user()->like($id);
+
+        return back();
+    }
+    
+    public function unlike($id)
+    {
+        \Auth::user()->unlike($id);
+        // 前のURLへリダイレクトさせる
+        return back();
+    }
 }

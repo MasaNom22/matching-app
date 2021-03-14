@@ -65,3 +65,7 @@ Route::patch('/articles/update/{id}', 'ArticleController@update')->name('article
 //コメント削除
 Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
 
+Route::prefix('articles')->name('articles.')->group(function () {
+    Route::post('/{id}/like', 'ArticleController@like')->name('like');
+    Route::delete('/{id}/like', 'ArticleController@unlike')->name('unlike');
+  });
