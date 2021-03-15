@@ -17,7 +17,8 @@
 Route::group(['middleware' => 'auth'], function() {
 Route::get('/', 'ArticleController@index')->name('articles.index');
 });
-
+//いいねした記事を表示
+Route::get('/likes/index', 'LikeController@index')->name('likes.index');
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');

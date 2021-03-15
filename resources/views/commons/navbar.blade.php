@@ -24,8 +24,10 @@
                         <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ '機能一覧' }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
+                            {{-- ページへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('likes.index', 'いいね一覧画面') !!}</li>
                             {{-- ページへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.index', 'ユーザー一覧画面') !!}</li>
                             {{-- ページへのリンク --}}
