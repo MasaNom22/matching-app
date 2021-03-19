@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'トップページ')
+@section('title', '投稿詳細画面')
 
 @section('content')
 
@@ -10,9 +10,7 @@
       <aside class="col-3 d-none d-md-block position-fixed">
       </aside>
       <main class="col-md-7 offset-md-5">
-          @foreach($articles as $article)
             @include('articles.card')
-            @endforeach
         </main>
     </div>
   </div>

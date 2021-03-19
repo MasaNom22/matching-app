@@ -55,6 +55,8 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 });
 //コメント表示画面
 Route::get('/articles/index', 'ArticleController@index')->name('articles.index');
+//コメント表示画面
+Route::get('/articles/show/{id}', 'ArticleController@show')->name('articles.show');
 //コメント投稿画面表示
 Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 //コメント投稿機能

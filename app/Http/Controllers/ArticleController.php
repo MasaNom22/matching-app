@@ -27,6 +27,16 @@ class ArticleController extends Controller
         ]);
     }
     
+    public function show($id)
+    {
+        
+	    $article = Article::find($id);
+        // タスク一覧ビューでそれを表示
+        return view('articles.show', [
+            'article' => $article,
+        ]);
+    }
+    
     public function create()
     {
         //use Illuminate\Support\Facades\Auth;が必要
