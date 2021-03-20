@@ -8,7 +8,7 @@
                                 <a class="text-dark" href="{{ route('articles.show', ['id' => $article->id]) }}"><h4>コメント: {{ $article->body }}</h4></a>
                     	        <h6 class="font-weight-lighter">投稿日時: {{ $article->created_at->format('Y/m/d H:i') }}</h6>
                     	        <h5 class="font-weight-bold">名前: {{ $article->user->name }}</h5>
-                    	        @include('likes.likes_button')
+
                     	  　</div>
                 	  　<!-- dropdown -->
                 	  　@if ($article->user_id == Auth::id())
@@ -30,7 +30,18 @@
                         </div>
                         <!-- dropdown -->
                       @endif
-                	  </div>　
+                	  </div>
+                	   <div class="card-body pt-0 pb-2 pl-3">
+                        <div class="card-text">
+                          <article-like
+                            v-bind:initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
+                            :initial-count-likes='@json($article->count_likes)'
+                            :authorized='@json(Auth::check())'
+                            endpoint="{{ route('articles.like', ['article' => $article]) }}"
+                          >
+                          </article-like>
+                        </div>
+                      </div>
             	    </div>
                 </div>
             </div>

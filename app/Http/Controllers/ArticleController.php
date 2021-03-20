@@ -92,17 +92,36 @@ class ArticleController extends Controller
 		return redirect()->route('articles.index');
 	}
 	
-	public function like($id)
-    {
-         \Auth::user()->like($id);
+// 	public function like($id)
+//     {
+//          \Auth::user()->like($id);
 
-        return back();
+//         return back();
+//     }
+    public function like(Request $request, Article $article)
+    {
+        $article->likes()->detach($request->user()->id);
+        $article->likes()->attach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+            'countLikes' => $article->count_likes,
+        ];
     }
     
-    public function unlike($id)
+    // public function unlike($id)
+    // {
+    //     \Auth::user()->unlike($id);
+    //     // 前のURLへリダイレクトさせる
+    //     return back();
+    // }
+     public function unlike(Request $request, Article $article)
     {
-        \Auth::user()->unlike($id);
-        // 前のURLへリダイレクトさせる
-        return back();
+        $article->likes()->detach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+            'countLikes' => $article->count_likes,
+        ];
     }
 }

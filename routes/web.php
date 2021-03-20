@@ -70,6 +70,6 @@ Route::patch('/articles/update/{id}', 'ArticleController@update')->name('article
 Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
 
 Route::prefix('articles')->name('articles.')->group(function () {
-    Route::post('/{id}/like', 'ArticleController@like')->name('like');
-    Route::delete('/{id}/like', 'ArticleController@unlike')->name('unlike');
+    Route::put('/{article}/like', 'ArticleController@like')->name('like')->middleware('auth');
+    Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
   });
