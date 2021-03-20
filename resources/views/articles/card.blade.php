@@ -6,8 +6,8 @@
                             <div style="" class="col-8">
                                 
                                 <a class="text-dark" href="{{ route('articles.show', ['id' => $article->id]) }}"><h4>コメント: {{ $article->body }}</h4></a>
-                    	        <h6>投稿日時: {{ $article->created_at->format('Y/m/d H:i') }}</h6>
-                    	        <h5>名前: {{ $article->user->name }}</h5>
+                    	        <h6 class="font-weight-lighter">投稿日時: {{ $article->created_at->format('Y/m/d H:i') }}</h6>
+                    	        <h5 class="font-weight-bold">名前: {{ $article->user->name }}</h5>
                     	        @include('likes.likes_button')
                     	  　</div>
                 	  　<!-- dropdown -->
