@@ -121,27 +121,55 @@ class UserController extends Controller
         //
     }
     
-     public function follow($id)
+    //  public function follow($id)
+    // {
+    //     // 認証済みユーザ（閲覧者）が、 idのユーザをフォローする
+    //     \Auth::user()->follow($id);
+    //     // 前のURLへリダイレクトさせる
+    //     // return back();
+    //     $users=User::All();
+    //     return view('users.index', [
+    //         "users" => $users,
+    //         ]);
+    // }
+     public function follow(Request $request, string $name)
     {
-        // 認証済みユーザ（閲覧者）が、 idのユーザをフォローする
-        \Auth::user()->follow($id);
-        // 前のURLへリダイレクトさせる
-        // return back();
-        $users=User::All();
-        return view('users.index', [
-            "users" => $users,
-            ]);
+        $user = User::where('name', $name)->first();
+
+        if ($user->id === $request->user()->id)
+        {
+            return abort('404', 'Cannot follow yourself.');
+        }
+
+        $request->user()->followings()->detach($user);
+        $request->user()->followings()->attach($user);
+
+        return ['id' => $user->id];
     }
-    public function unfollow($id)
+    // public function unfollow($id)
+    // {
+    //     // 認証済みユーザ（閲覧者）が、 idのユーザをアンフォローする
+    //     \Auth::user()->unfollow($id);
+    //     // 前のURLへリダイレクトさせる
+    //     // return back();
+    //     $users=User::All();
+    //     return view('users.index', [
+    //         "users" => $users,
+    //         ]);
+    // }
+    
+     public function unfollow(Request $request, string $name)
     {
-        // 認証済みユーザ（閲覧者）が、 idのユーザをアンフォローする
-        \Auth::user()->unfollow($id);
-        // 前のURLへリダイレクトさせる
-        // return back();
-        $users=User::All();
-        return view('users.index', [
-            "users" => $users,
-            ]);
+        $user = User::where('name', $name)->first();
+        
+        if ($user->id === $request->user()->id)
+        {
+            return abort('404', 'Cannot follow yourself.');
+        }
+
+        $request->user()->followings()->detach($user);
+
+        return ['id' => $user->id];
     }
     
      public function followings($id)

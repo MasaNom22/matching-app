@@ -16,6 +16,15 @@
 	        <img src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
             @else
             @endif
+            @if( Auth::id() !== $user->id )
+            <follow-button
+              class="ml-auto"
+              :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
+              :authorized='@json(Auth::check())'
+              endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
+            >
+            </follow-button>
+          @endif
             @if (Auth::id() != $user->id)
                 @if (Auth::user()->is_following($user->id))
                     {{-- アンフォローボタンのフォーム --}}

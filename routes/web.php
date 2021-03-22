@@ -45,9 +45,10 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //ユーザー更新
     Route::patch('update/{id}', 'UserController@update')->name('users.update');
     //ユーザーをフォロー
-    Route::post('follow/{id}', 'UserController@follow')->name('users.follow');
+    // Route::post('follow/{id}', 'UserController@follow')->name('users.follow');
+    Route::put('/{name}/follow', 'UserController@follow')->name('users.follow');
     //ユーザーをアンフォロー
-    Route::delete('unfollow/{id}', 'UserController@unfollow')->name('users.unfollow');
+    Route::delete('/{name}/follow', 'UserController@unfollow')->name('users.unfollow');
     //フォローユーザー一覧表示
     Route::get('followings/{id}', 'UserController@followings')->name('users.followings');
     //フォロワー一覧表示
