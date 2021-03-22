@@ -2,12 +2,20 @@
                 <div class="col-md mb-4">
                     <div class="card article-card">
                         <div class="card-body d-flex flex-row row">
-                            <div class="col-2"><i class="fas fa-user-circle fa-3x mr-1"></i></div>
+                            <div class="col-2">
+                              <a href="{{ route('users.show', ['id' => $article->user->id]) }}" class="text-dark">
+                                <i class="fas fa-user-circle fa-3x mr-1"></i>
+                              </a>
+                            </div>
                             <div style="" class="col-8">
                                 
                                 <a class="text-dark" href="{{ route('articles.show', ['id' => $article->id]) }}"><h4>コメント: {{ $article->body }}</h4></a>
                     	        <h6 class="font-weight-lighter">投稿日時: {{ $article->created_at->format('Y/m/d H:i') }}</h6>
-                    	        <h5 class="font-weight-bold">名前: {{ $article->user->name }}</h5>
+                    	        <h5 class="font-weight-bold">
+                    	          <a href="{{ route('users.show', ['id' => $article->user->id]) }}" class="text-dark">
+                    	            名前: {{ $article->user->name }}
+                    	          </a>
+                    	            </h5>
 
                     	  　</div>
                 	  　<!-- dropdown -->
