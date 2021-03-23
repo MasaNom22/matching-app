@@ -13,8 +13,9 @@
 	        <h5>年齢: {{ $user->age }}</h5>
 	        <h5>性別: {{ $user->gender_label }}</h5>
 	        @if(isset($user->uploadimages))
-	        <img src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
+	        <img class="user-icon rounded-circle" src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
             @else
+            <i class="fas fa-user-circle fa-9x mr-1"></i>
             @endif
             @if( Auth::id() !== $user->id )
             <follow-button

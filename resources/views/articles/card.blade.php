@@ -3,9 +3,13 @@
                     <div class="card article-card">
                         <div class="card-body d-flex flex-row row">
                             <div class="col-2">
+                              @if(isset($article->user->uploadimages))
+	                              <img src="{{ Storage::url($article->user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
+                              @else
                               <a href="{{ route('users.show', ['id' => $article->user->id]) }}" class="text-dark">
                                 <i class="fas fa-user-circle fa-3x mr-1"></i>
                               </a>
+                              @endif
                             </div>
                             <div style="" class="col-8">
                                 
