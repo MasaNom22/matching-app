@@ -69,11 +69,21 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id')->withTimestamps();
     }
+    //アクセサ
+    public function getCountFollowingsAttribute(): int
+    {
+        return $this->followings->count();
+    }
+    
 
     //ユーザーにフォローされているフォロワー
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id')->withTimestamps();
+    }
+    public function getCountFollowersAttribute(): int
+    {
+        return $this->followers->count();
     }
     
     public function likes()
