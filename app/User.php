@@ -181,4 +181,14 @@ class User extends Authenticatable
        //相互フォロー中のユーザを返す
         return $follow_each;
     }
+    
+    public function chatMessages()
+    {
+        return $this->hasMany('App\ChatMessage');
+    }
+
+    public function chatRoomUsers()
+    {
+        return $this->hasMany('App\ChatRoomUsers');
+    }
 }

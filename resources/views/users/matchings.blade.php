@@ -4,7 +4,6 @@
 
 @section('content')
 <h2>フォロワー一覧画面</h2>
-<h2>{{ $user->name}}さんのマッチングユーザー：{{ $user->follow_each_count }}名</h2>
 <div class=container>
     <div class=row>
         @foreach ($users as $user)
