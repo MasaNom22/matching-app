@@ -201,4 +201,16 @@ class UserController extends Controller
             'users' => $followers,
         ]);
     }
+    
+
+    
+    public function follow_each($id){
+        $user=User::find($id);
+        $users=User::All();
+       //相互フォロー中のユーザを返す
+        return view('users.matchings', [
+            'user' => $user,
+            "users" => $users,
+        ]);
+    }
 }

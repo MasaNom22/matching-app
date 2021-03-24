@@ -172,4 +172,13 @@ class User extends Authenticatable
             ? (bool)$this->followers->where('id', $user->id)->count()
             : false;
     }
+    
+    public function follow_each(){
+        //ユーザがフォロー中のユーザを取得
+        $userIds = $this->followings()->pluck('users.id')->toArray();
+       //相互フォロー中のユーザを取得
+        $follow_each = $this->followers()->whereIn('users.id', $userIds)->pluck('users.id')->toArray();
+       //相互フォロー中のユーザを返す
+        return $follow_each;
+    }
 }

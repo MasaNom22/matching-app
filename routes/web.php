@@ -53,6 +53,8 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('followings/{id}', 'UserController@followings')->name('users.followings');
     //フォロワー一覧表示
     Route::get('followers/{id}', 'UserController@followers')->name('users.followers');
+    //マッチングユーザー一覧画面
+    Route::get('/matching/{user}', 'UserController@follow_each')->name('users.matchs');
 });
 //コメント表示画面
 Route::get('/articles/index', 'ArticleController@index')->name('articles.index');
