@@ -15,6 +15,7 @@
 	        @if(isset($user->uploadimages))
 	        <img src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
             @else
+            <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
             @if (Auth::id() != $user->id)
                 @if (Auth::user()->is_following($user->id))
