@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
 
-<div class=container>
-  <div class=row>
+<div class="chatPage container">
+  <div class="row">
     <header class="header">
     <a href="{{route('users.matchs', ['user' => Auth::user()->id])}}" class="linkToMatching"></a>
-      <div class="col-md-2">
-        <div class=" center-block">
+      <div class="col-md-2 chatPartner">
+        <div class="chatPartner_img center-block">
           @if(isset($chat_room_user->uploadimages))
   	        <img src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
           @else

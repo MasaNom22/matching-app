@@ -2,6 +2,11 @@
 
 namespace App\Events;
 
+use App\ChatRoom;
+use App\ChatRoomUser;
+use App\ChatMessage;
+use App\User;
+
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
