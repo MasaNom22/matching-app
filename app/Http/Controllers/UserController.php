@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\UploadImage;
 
 use App\User;
+use App\Article;
 
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
         $user_id = $id;
         //アップロードした画像を取得
 		$upload = UploadImage::find($user_id);
-		
+		$articles = Article::All()->where('user_id',$id);
 		// ユーザの投稿数を取得
         $user->loadCount('articles');
 		// ユーザのフォロワーをカウント
@@ -70,6 +71,7 @@ class UserController extends Controller
         return view('users.show', [
             'user' => $user,
             "image" => $upload,
+            'articles' => $articles,
         ]);
     }
 

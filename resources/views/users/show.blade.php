@@ -24,7 +24,7 @@
                         <div class="d-flex">
                             <div>
                                 @if ($user->id === Auth::user()->id)
-                                    <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                                    <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-primary">プロフィールを編集する</a>
                                 @else
                                     @if (Auth::user()->is_following($user->id))
                                         <follow-button
@@ -63,6 +63,10 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-8">@foreach($articles as $article)
+            @include('articles.card')
+            @endforeach</div>
     </div>
 </div>
+
 @endsection

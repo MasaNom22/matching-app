@@ -16,11 +16,7 @@
 	        <img src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
             @else
             @endif
-            <form method="POST" action="{{ route('chat.show') }}">
-            @csrf
-              <input name="user_id" type="hidden" value="{{$user->id}}">
-              <button type="submit" class="chatForm_btn">チャットを開く</button>
-            </form>
+            
         </div>
         @endif
 @endforeach

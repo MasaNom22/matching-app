@@ -18,7 +18,7 @@
                     <li class="nav-item"></li>
                     {{-- 画像投稿ページへのリンク --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('upload_form') }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>現場写真投稿</a>
+                        <a class="nav-link" href="{{ route('upload_form') }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>写真投稿</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
