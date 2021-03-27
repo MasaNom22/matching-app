@@ -64,6 +64,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+    public function getCountArticlesAttribute(): int
+    {
+        return $this->articles->count();
+    }
     //フォロワーがフォローしているユーザー
     public function followings()
     {

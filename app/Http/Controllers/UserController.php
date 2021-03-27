@@ -57,6 +57,14 @@ class UserController extends Controller
         $user_id = $id;
         //アップロードした画像を取得
 		$upload = UploadImage::find($user_id);
+		
+		// ユーザの投稿数を取得
+        $user->loadCount('articles');
+		// ユーザのフォロワーをカウント
+        $user->loadCount('followers');
+        // ユーザのフォローユーザーを取得
+        $user->loadCount('followings');
+        
 
         // ユーザ詳細ビューでそれを表示
         return view('users.show', [
