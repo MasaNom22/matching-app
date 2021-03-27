@@ -58,7 +58,7 @@ class UserController extends Controller
         $user_id = $id;
         //アップロードした画像を取得
 		$upload = UploadImage::find($user_id);
-		$articles = Article::All()->where('user_id',$id);
+		$articles = Article::where('user_id',$id)->get();
 		// ユーザの投稿数を取得
         $user->loadCount('articles');
 		// ユーザのフォロワーをカウント

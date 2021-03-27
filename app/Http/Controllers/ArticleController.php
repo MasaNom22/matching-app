@@ -22,9 +22,9 @@ class ArticleController extends Controller
      public function index()
     {
         // 認証済みユーザを取得
-        // $user = \Auth::user();
-		//UserモデルにArticleモデルとの関係を書く
-        //$articles = $user->articles()->orderBy('created_at', 'desc')->paginate(5);
+        // $user_gender = \Auth::user()->gender;
+        // $users = User::where('gender', '!=', $user_gender)->get();
+        // $articles = Article::whereIn('user_id',$follows)
 	    $articles = Article::all()->sortByDesc('created_at');
         // タスク一覧ビューでそれを表示
         return view('articles.index', [
