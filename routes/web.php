@@ -56,15 +56,14 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //マッチングユーザー一覧画面
     Route::get('/matching/{user}', 'UserController@follow_each')->name('users.matchs');
 });
-//コメント表示画面
-Route::get('/articles/index', 'ArticleController@index')->name('articles.index');
+Route::group(['middleware' => 'auth'], function() {
 //コメント表示画面
 Route::get('/articles/show/{id}', 'ArticleController@show')->name('articles.show');
 //コメント投稿画面表示
 Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 //コメント投稿機能
 Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
-
+});
 //コメント編集機能
 Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
 //ユーザー更新

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'send', 'recieve', 'message'
+        'name', 'email', 'password', 'gender', 'age'
     ];
     
     const GENDER = [
