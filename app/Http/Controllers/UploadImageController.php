@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\UploadImage;
+use App\User;
 
 class UploadImageController extends Controller
 {
-    function show(){
-		return view("upload_form");
+    function show($id){
+    	$user=User::find($id);
+		return view("upload_form", [
+            "user" => $user,
+            ]);
 	}
 	
 	function upload(Request $request){

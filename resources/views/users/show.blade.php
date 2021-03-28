@@ -26,7 +26,6 @@
                                 @if ($user->id === Auth::user()->id)
                                     <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-primary">プロフィールを編集する</a>
                                 @else
-                                    @if (Auth::user()->is_following($user->id))
                                         <follow-button
                                           class="ml-auto"
                                           :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
@@ -34,13 +33,6 @@
                                           endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
                                         >
                                         </follow-button>
-                                    @else
-                                        <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
-                                            {{ csrf_field() }}
-
-                                            <button type="submit" class="btn btn-primary">フォローする</button>
-                                        </form>
-                                    @endif
                                 @endif
                             </div>
                         </div>

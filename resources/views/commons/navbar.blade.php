@@ -18,7 +18,7 @@
                     <li class="nav-item"></li>
                     {{-- 画像投稿ページへのリンク --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('upload_form') }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>写真投稿</a>
+                        <a class="nav-link" href="{{ route('upload_form', ['id' => Auth::id()]) }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>写真投稿</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
@@ -31,9 +31,9 @@
                             {{-- ページへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.index', 'ユーザー一覧画面') !!}</li>
                             {{-- ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細画面', ['id' => Auth::user()->id]) !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細画面', ['id' => Auth::id()]) !!}</li>
                             {{-- ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.matchs', 'マッチング画面', ['user' => Auth::user()->id]) !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('users.matchs', 'マッチング画面', ['user' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>

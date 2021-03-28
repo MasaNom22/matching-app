@@ -31,7 +31,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::get('guest', 'Auth\LoginController@guestLogin')->name('login.guest');
 
 //画像投稿画面
-Route::get('/form', 'UploadImageController@show')->name("upload_form");
+Route::get('/form/{id}', 'UploadImageController@show')->name("upload_form");
 //画像アップロード
 Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
 //ユーザー関係
