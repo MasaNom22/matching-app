@@ -11,8 +11,11 @@ class UploadImageController extends Controller
 {
     function show($id){
     	$user=User::find($id);
+    	$user_id = $id;
+    	$upload = UploadImage::find($user_id);
 		return view("upload_form", [
             "user" => $user,
+            "image" => $upload,
             ]);
 	}
 	

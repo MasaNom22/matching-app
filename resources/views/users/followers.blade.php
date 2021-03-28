@@ -17,18 +17,14 @@
             @else
             <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
-            @if (Auth::id() != $user->id)
-                @if (Auth::user()->is_following($user->id))
-                    {{-- アンフォローボタンのフォーム --}}
-                    {!! Form::open(['route' => ['users.unfollow', $user->id], 'method' => 'delete']) !!}
-                        {!! Form::submit('フォローを外す', ['class' => "btn btn-primary btn-block"]) !!}
-                    {!! Form::close() !!}
-                @else
-                    {{-- フォローボタンのフォーム --}}
-                    {!! Form::open(['route' => ['users.follow', $user->id]]) !!}
-                        {!! Form::submit('フォローする', ['class' => "btn btn-primary btn-block"]) !!}
-                    {!! Form::close() !!}
-                @endif
+            @if( Auth::id() !== $user->id )
+            <follow-button
+              class="ml-auto"
+              :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
+              :authorized='@json(Auth::check())'
+              endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
+            >
+            </follow-button>
             @endif
         </div>
         @endforeach
