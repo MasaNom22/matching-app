@@ -10,8 +10,8 @@
             <div class="card">
                 <div class="d-inline-flex">
                     <div class="p-5 d-flex flex-column">
-                        @if(isset($image))
-                        <img src="{{ Storage::url($image->file_path) }}" class="rounded-circle" width="100" height="100">
+                        @if(isset($user->uploadimages))
+                        <img src="{{ Storage::url($user->uploadimages->file_path) }}" class="rounded-circle" width="100" height="100">
                         @else
                         <i class="fas fa-user-circle fa-9x mr-1"></i>
                         @endif

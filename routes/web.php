@@ -15,10 +15,10 @@
 //     return view('welcome');
 // });
 Route::group(['middleware' => 'auth'], function() {
-Route::get('/', 'ArticleController@index')->name('articles.index');
+    Route::get('/', 'ArticleController@index')->name('articles.index');
+    //いいねした記事を表示
+    Route::get('/likes/index', 'LikeController@index')->name('likes.index');
 });
-//いいねした記事を表示
-Route::get('/likes/index', 'LikeController@index')->name('likes.index');
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -57,27 +57,23 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('/matching/{user}', 'UserController@follow_each')->name('users.matchs');
 });
 Route::group(['middleware' => 'auth'], function() {
-//コメント表示画面
-Route::get('/articles/show/{id}', 'ArticleController@show')->name('articles.show');
-//コメント投稿画面表示
-Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
-//コメント投稿機能
-Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
+    //コメント表示画面
+    Route::get('/articles/show/{id}', 'ArticleController@show')->name('articles.show');
+    //コメント投稿画面表示
+    Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
+    //コメント投稿機能
+    Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
+    //コメント編集機能
+    Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
+    //ユーザー更新
+    Route::patch('/articles/update/{id}', 'ArticleController@update')->name('articles.update');
+    //コメント削除
+    Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
 });
-//コメント編集機能
-Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
-//ユーザー更新
-Route::patch('/articles/update/{id}', 'ArticleController@update')->name('articles.update');
-//コメント削除
-Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
 
 Route::prefix('articles')->name('articles.')->group(function () {
     Route::put('/{article}/like', 'ArticleController@like')->name('like')->middleware('auth');
     Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
   });
-  
-  Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
-    Route::post('show', 'ChatController@show')->name('chat.show');
-    Route::post('chat', 'ChatController@chat')->name('chat.chat');
-});
+
 

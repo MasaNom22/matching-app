@@ -14,15 +14,15 @@
 </div>
 @endif
 	<h2>画像登録画面</h2>
-	@if(isset($image))
+	@if(isset($user->uploadimages))
 	                <div class="form-group text-center">
 	                  <label for="profile_image">
 	                    <p class="mb-1">プロフィール画像</p>
-	                    <img class="profile-icon image-upload rounded-circle" src="{{ Storage::url($image->file_path) }}" style="width:50%;"　alt="プロフィール画像">
+	                    <img class="profile-icon image-upload rounded-circle" src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:50%;"　alt="プロフィール画像">
 	                    
 	                  </label>
 	                </div>
-	                @else
+	@else
 		<form method="post" action="{{ route('upload_image') }}" enctype="multipart/form-data">
 		
 			@csrf
