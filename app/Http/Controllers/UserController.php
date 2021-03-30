@@ -55,10 +55,10 @@ class UserController extends Controller
     {
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
-		$articles = Article::where('user_id',$id)->get();
-		// ユーザの投稿数を取得
+        $articles = Article::where('user_id', $id)->get();
+        // ユーザの投稿数を取得
         $user->loadCount('articles');
-		// ユーザのフォロワーをカウント
+        // ユーザのフォロワーをカウント
         $user->loadCount('followers');
         // ユーザのフォローユーザーを取得
         $user->loadCount('followings');
@@ -82,12 +82,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user_id = $id;
         //アップロードした画像を取得
-		$upload = UploadImage::find($user_id);
+        $upload = UploadImage::find($user_id);
 
         return view('users.edit', [
             'user' => $user,
             'image' => $upload,
-        ]); 
+        ]);
     }
 
     /**
@@ -99,16 +99,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-      //ユーザーを特定
-      $user = User::find($id);
-      $user_id = $id;
-      //アップロードした画像を取得
-	  $upload = UploadImage::find($user_id);
-      //ユーザーの上書き
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->age = $request->age;
-      $user->save();
+        //ユーザーを特定
+        $user = User::find($id);
+        $user_id = $id;
+        //アップロードした画像を取得
+        $upload = UploadImage::find($user_id);
+        //ユーザーの上書き
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->age = $request->age;
+        $user->save();
         return redirect()->route('users.show', [
             'user' => $user,
             "image" => $upload,
@@ -138,12 +138,11 @@ class UserController extends Controller
     //         "users" => $users,
     //         ]);
     // }
-     public function follow(Request $request, string $name)
+    public function follow(Request $request, string $name)
     {
         $user = User::where('name', $name)->first();
 
-        if ($user->id === $request->user()->id)
-        {
+        if ($user->id === $request->user()->id) {
             return abort('404', 'Cannot follow yourself.');
         }
 
@@ -164,12 +163,11 @@ class UserController extends Controller
     //         ]);
     // }
     
-     public function unfollow(Request $request, string $name)
+    public function unfollow(Request $request, string $name)
     {
         $user = User::where('name', $name)->first();
         
-        if ($user->id === $request->user()->id)
-        {
+        if ($user->id === $request->user()->id) {
             return abort('404', 'Cannot follow yourself.');
         }
 
@@ -178,7 +176,7 @@ class UserController extends Controller
         return ['id' => $user->id];
     }
     
-     public function followings($id)
+    public function followings($id)
     {
         $user = User::findOrFail($id);
         // ユーザのフォローユーザーをカウント
@@ -210,13 +208,19 @@ class UserController extends Controller
     
 
     
-    public function follow_each($id){
+    public function follow_each($id)
+    {
         $user=User::find($id);
         $users=User::All();
-       //相互フォロー中のユーザを返す
+        //相互フォロー中のユーザを返す
         return view('users.matchings', [
             'user' => $user,
             "users" => $users,
         ]);
+    }
+    
+    public function chatRoomUsers()
+    {
+        return $this->hasMany('App\ChatRoomUsers');
     }
 }

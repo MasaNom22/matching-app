@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\ChatRoom;
 use App\ChatRoomUser;
-use App\ChatMessage;
 use App\User;
 
 use App\Events\ChatPusher;
@@ -15,9 +14,8 @@ use Auth;
 
 class ChatController extends Controller
 {
-    
-    public static function show(Request $request){
-    
+    public static function show(Request $request)
+    {
         $matching_user_id = $request->user_id;
         
         // 自分の持っているチャットルームを取得
@@ -31,24 +29,25 @@ class ChatController extends Controller
 
 
         // なければ作成する
-        if ($chat_room_id->isEmpty()){
-
+        if ($chat_room_id->isEmpty()) {
             ChatRoom::create(); // チャットルーム作成
             
             $latest_chat_room = ChatRoom::orderBy('created_at', 'desc')->first(); // 最新チャットルームを取得
 
             $chat_room_id = $latest_chat_room->id;
 
-            ChatRoomUser::create( 
-            ['chat_room_id' => $chat_room_id,
-            'user_id' => Auth::id()]);
+            ChatRoomUser::create(
+                ['chat_room_id' => $chat_room_id,
+            'user_id' => Auth::id()]
+            );
 
             ChatRoomUser::create(
-            ['chat_room_id' => $chat_room_id,
-            'user_id' => $matching_user_id]);
+                ['chat_room_id' => $chat_room_id,
+            'user_id' => $matching_user_id]
+            );
         }
 
-        if(is_object($chat_room_id)){
+        if (is_object($chat_room_id)) {
             $chat_room_id = $chat_room_id->first();
         }
         
@@ -56,25 +55,13 @@ class ChatController extends Controller
 
         $chat_room_user_name = $chat_room_user->name;
 
-        $chat_messages = ChatMessage::where('chat_room_id', $chat_room_id)
-        ->orderby('created_at')
-        ->get();
-
-        return view('chat.show', 
-        compact('chat_room_id', 'chat_room_user',
-        'chat_messages','chat_room_user_name'));
-
-    }
-
-    // この行から下を追加します。
-    public static function chat(Request $request){
-
-        $chat = new ChatMessage();
-        $chat->chat_room_id = $request->chat_room_id;
-        $chat->user_id = $request->user_id;
-        $chat->message = $request->message;
-        $chat->save();
-
-        event(new ChatPusher($chat));
+        return view(
+            'chat.show',
+            compact(
+                'chat_room_id',
+                'chat_room_user',
+                'chat_room_user_name'
+            )
+        );
     }
 }

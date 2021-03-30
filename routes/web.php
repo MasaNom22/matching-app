@@ -14,7 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'ArticleController@index')->name('articles.index');
     //いいねした記事を表示
     Route::get('/likes/index', 'LikeController@index')->name('likes.index');
@@ -56,7 +56,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //マッチングユーザー一覧画面
     Route::get('/matching/{user}', 'UserController@follow_each')->name('users.matchs');
 });
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     //コメント表示画面
     Route::get('/articles/show/{id}', 'ArticleController@show')->name('articles.show');
     //コメント投稿画面表示
@@ -74,6 +74,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::prefix('articles')->name('articles.')->group(function () {
     Route::put('/{article}/like', 'ArticleController@like')->name('like')->middleware('auth');
     Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
-  });
+});
 
-
+Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
+    Route::post('show', 'ChatController@show')->name('chat.show');
+});
