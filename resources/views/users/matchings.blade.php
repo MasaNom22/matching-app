@@ -17,7 +17,7 @@
             @else
             <i class="fas fa-user-circle fa-9x mr-1"></i>
             @endif
-            <form method="POST" action="{{ route('chat.show') }}">
+            <form method="POST" action="{{ route('chat') }}">
             @csrf
               <input name="user_id" type="hidden" value="{{$user->id}}">
               <button type="submit" class="chatForm_btn">チャットを開く</button>

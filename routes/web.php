@@ -76,6 +76,9 @@ Route::prefix('articles')->name('articles.')->group(function () {
     Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
 });
 
-Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
-    Route::post('show', 'ChatController@show')->name('chat.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('chat', 'ChatController@show')->name('chat');
 });
+
+Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
+Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録

@@ -56,7 +56,7 @@ class ChatController extends Controller
         $chat_room_user_name = $chat_room_user->name;
 
         return view(
-            'chat.show',
+            'chat',
             compact(
                 'chat_room_id',
                 'chat_room_user',
