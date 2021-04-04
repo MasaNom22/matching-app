@@ -19,13 +19,9 @@ class ArticleController extends Controller
     //     $this->authorizeResource(Article::class, 'article');
     // }
     
-     public function index()
+    public function index()
     {
-        // 認証済みユーザを取得
-        // $user_gender = \Auth::user()->gender;
-        // $users = User::where('gender', '!=', $user_gender)->get();
-        // $articles = Article::whereIn('user_id',$follows)
-	    $articles = Article::all()->sortByDesc('created_at');
+        $articles = Article::all()->sortByDesc('created_at');
         // タスク一覧ビューでそれを表示
         return view('articles.index', [
             'articles' => $articles,
@@ -34,8 +30,7 @@ class ArticleController extends Controller
     
     public function show($id)
     {
-        
-	    $article = Article::find($id);
+        $article = Article::find($id);
         // タスク一覧ビューでそれを表示
         return view('articles.show', [
             'article' => $article,
@@ -60,7 +55,6 @@ class ArticleController extends Controller
         $article->save();
         
         return redirect()->route('articles.index');
-        
     }
     
     public function edit($id)
@@ -72,27 +66,27 @@ class ArticleController extends Controller
         ]);
     }
     
-     public function update($id, Request $request)
+    public function update($id, Request $request)
     {
         $article = Article::find($id);
-    	$request->validate([
-    		'body' => 'required',
-		]);
-    	$article->body = $request->body;
+        $request->validate([
+            'body' => 'required',
+        ]);
+        $article->body = $request->body;
         $article->save();
         
         return redirect()->route('articles.index');
-        
     }
     
-    function destroy($id){
-		$deleteArticle = Article::find($id);
-		$deleteArticle->delete();
-	
-		return redirect()->route('articles.index');
-	}
-	
-// 	public function like($id)
+    public function destroy($id)
+    {
+        $deleteArticle = Article::find($id);
+        $deleteArticle->delete();
+    
+        return redirect()->route('articles.index');
+    }
+    
+    // 	public function like($id)
 //     {
 //          \Auth::user()->like($id);
 
@@ -115,7 +109,7 @@ class ArticleController extends Controller
     //     // 前のURLへリダイレクトさせる
     //     return back();
     // }
-     public function unlike(Request $request, Article $article)
+    public function unlike(Request $request, Article $article)
     {
         $article->likes()->detach($request->user()->id);
 
