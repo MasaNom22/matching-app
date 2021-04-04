@@ -20,7 +20,7 @@
             <form method="POST" action="{{ route('chat') }}">
             @csrf
               <input name="user_id" type="hidden" value="{{$user->id}}">
-              <button type="submit" class="chatForm_btn">チャットを開く</button>
+              <button type="submit" class="btn btn-primary">チャットを開く</button>
             </form>
             
         </div>

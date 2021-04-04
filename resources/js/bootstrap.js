@@ -25,5 +25,5 @@ window.Echo = new Echo({
     client:process.env.MIX_PUSHER_APP_ID,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true,
-    encrypted: true
+    encrypted: false
 });

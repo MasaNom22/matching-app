@@ -78,6 +78,7 @@ Route::prefix('articles')->name('articles.')->group(function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('chat', 'ChatController@show')->name('chat');
+    Route::get('chat', 'ChatController@show')->name('chat.index');
 });
 
 Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
