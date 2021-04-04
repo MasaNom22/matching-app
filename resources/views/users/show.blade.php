@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 mb-3">
+        <div class="col-md-8 mb-1">
             <div class="card">
                 <div class="d-inline-flex">
                     <div class="p-5 d-flex flex-column">
@@ -20,7 +20,7 @@
                             <span class="text-secondary">{{ $user->age }}歳</span>
                         </div>
                     </div>
-                    <div class="p-5 d-flex flex-column justify-content-between">
+                    <div class="p-5 d-flex flex-column justify-content-start">
                         <div class="d-flex">
                             <div>
                                 @if ($user->id === Auth::user()->id)
@@ -49,8 +49,25 @@
                                 <p class="font-weight-bold">フォロワー数</p>
                                 <span><a href="{{ action('UserController@followers', $user->id) }}">{{ $user->followers_count }}</a></span>
                             </div>
+                            
                         </div>
-                        
+                        <div class="mt-2 d-flex justify-content-start">
+                            <p class="font-weight-bold">趣味</p>
+                            <span>
+                                @foreach($user->tags as $tag)
+                                @if($loop->first)
+                                  <div class="card-body pt-0 pb-4 pl-3">
+                                    <div class="card-text line-height">
+                                @endif
+                                      <a href="" class="border p-1 mr-1 mt-1 text-muted">
+                                        {{ $tag->hashtag }}
+                                      </a>
+                                @if($loop->last)
+                                    </div>
+                                  </div>
+                                @endif
+                              @endforeach</span>
+                        </div>
                     </div>
                 </div>
             </div>

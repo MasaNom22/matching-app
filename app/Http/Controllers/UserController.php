@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 use App\UploadImage;
 
 use App\User;
 use App\Article;
+use App\Tag;
 
 class UserController extends Controller
 {
@@ -83,10 +85,14 @@ class UserController extends Controller
         $user_id = $id;
         //アップロードした画像を取得
         $upload = UploadImage::find($user_id);
+        $tagNames = $user->tags->map(function ($tag) {
+            return ['text' => $tag->name];
+        });
 
         return view('users.edit', [
             'user' => $user,
             'image' => $upload,
+            'tagNames' => $tagNames,
         ]);
     }
 
@@ -97,7 +103,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         //ユーザーを特定
         $user = User::find($id);
@@ -109,6 +115,13 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->age = $request->age;
         $user->save();
+        
+        $user->tags()->detach();
+        $request->tags->each(function ($tagName) use ($user) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $user->tags()->attach($tag);
+        });
+        
         return redirect()->route('users.show', [
             'user' => $user,
             "image" => $upload,
@@ -222,5 +235,10 @@ class UserController extends Controller
     public function chatRoomUsers()
     {
         return $this->hasMany('App\ChatRoomUsers');
+    }
+    
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 }

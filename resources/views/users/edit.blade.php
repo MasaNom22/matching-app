@@ -36,6 +36,13 @@
                     <label for="age">年齢</label>
                     <input class="form-control" type="number" min="18" name="age" value="{{ $user->age ?? old('age') }}">
                 </div>
+                <div class="form-group">
+                  <label for="interest">趣味</label>
+                  <user-tags-input
+                   :initial-tags='@json($tagNames ?? [])'
+                  >
+                  </user-tags-input>
+                </div>
                 
                 
                 <div class="d-flex justify-content-between align-items-center">

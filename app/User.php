@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -177,12 +178,13 @@ class User extends Authenticatable
             : false;
     }
     
-    public function follow_each(){
+    public function follow_each()
+    {
         //ユーザがフォロー中のユーザを取得
         $userIds = $this->followings()->pluck('users.id')->toArray();
-       //相互フォロー中のユーザを取得
+        //相互フォロー中のユーザを取得
         $follow_each = $this->followers()->whereIn('users.id', $userIds)->pluck('users.id')->toArray();
-       //相互フォロー中のユーザを返す
+        //相互フォロー中のユーザを返す
         return $follow_each;
     }
     
@@ -194,5 +196,10 @@ class User extends Authenticatable
     public function chatRoomUsers()
     {
         return $this->hasMany('App\ChatRoomUsers');
+    }
+    
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 }
