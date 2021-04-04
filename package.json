@@ -24,5 +24,8 @@
     "dependencies": {
         "laravel-echo": "^1.10.0",
         "pusher-js": "^7.0.3"
-    }
+    },
+    "engines": {
+    "node": "10.23.0"
+  }
 }
