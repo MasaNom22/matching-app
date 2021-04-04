@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'ArticleController@index')->name('articles.index');
     //いいねした記事を表示
