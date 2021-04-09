@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'フォロワー一覧画面')
+@section('title', 'マッチングユーザー一覧画面')
 
 @section('content')
-<h2>フォロワー一覧画面</h2>
+<h2>マッチングユーザー一覧画面</h2>
 <div class=container>
     <div class=row>
         @foreach ($users as $user)
