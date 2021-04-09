@@ -11,12 +11,6 @@
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'ArticleController@index')->name('articles.index');
-    //いいねした記事を表示
-    Route::get('/likes/index', 'LikeController@index')->name('likes.index');
-});
-
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
@@ -67,10 +61,17 @@ Route::group(['middleware' => 'auth'], function () {
     //コメント削除
     Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
 });
-
+//いいね・いいねを外すボタン
 Route::prefix('articles')->name('articles.')->group(function () {
     Route::put('/{article}/like', 'ArticleController@like')->name('like')->middleware('auth');
     Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    //投稿一覧画面表示
+    Route::get('/', 'ArticleController@index')->name('articles.index');
+    //いいねした記事を表示
+    Route::get('/likes/index', 'LikeController@index')->name('likes.index');
 });
 
 Route::group(['middleware' => 'auth'], function () {
