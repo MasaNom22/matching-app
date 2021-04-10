@@ -5,7 +5,7 @@
                             <div class="col-2">
                               @if(isset($article->user->uploadimages))
                               <a href="{{ route('users.show', ['id' => $article->user->id]) }}" class="text-dark">
-	                              <img src="{{ Storage::url($article->user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
+	                              <img class="user-icon rounded-circle" src="{{ Storage::url($article->user->uploadimages->file_path) }}" style="width:100%;"　alt="写真"/>
 	                            </a>
                               @else
                               <a href="{{ route('users.show', ['id' => $article->user->id]) }}" class="text-dark">
@@ -16,11 +16,11 @@
                             <div style="" class="col-8">
                                 <h5 class="font-weight-bold">
                       	          <a href="{{ route('users.show', ['id' => $article->user->id]) }}" class="text-dark">
-                      	            名前: {{ $article->user->name }}
+                      	             {{ $article->user->name }} さん
                       	          </a>
                     	         </h5>
                     	         <h6 class="font-weight-lighter">投稿日時: {{ $article->created_at->format('Y/m/d H:i') }}</h6>
-                                <a class="text-dark" href="{{ route('articles.show', ['id' => $article->id]) }}"><h4>コメント: {{ $article->body }}</h4></a>
+                                <a class="text-dark" href="{{ route('articles.show', ['id' => $article->id]) }}"><h4> {{ $article->body }}</h4></a>
                     	  　  </div>
                 	  　      <!-- dropdown -->
                       	  　@if ($article->user_id == Auth::id())
