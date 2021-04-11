@@ -6,7 +6,7 @@
 ## 使用技術
 - php (7.3.27)
 - laravel/framework (v6.20.20)
-- AWS（VPC・EC2・Route 53・ELB・Certificate Manager）
+- AWS（VPC・EC2・Route 53・ALB・ACM）
 - vue.js
 - node.js(v10.23.0)
 - npm(6.14.8)
