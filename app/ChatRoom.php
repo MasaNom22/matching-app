@@ -10,4 +10,9 @@ class ChatRoom extends Model
     {
         return $this->hasMany('App\ChatRoomUser');
     }
+    
+    public function chatMessages()
+    {
+        return $this->hasMany('App\ChatMessage');
+    }
 }

@@ -79,9 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('chat', 'ChatController@show')->name('chat');
+    Route::post('chat', 'ChatController@show')->name('chat.show');
     Route::get('chat', 'ChatController@show')->name('chat.index');
 });
 
-Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
-Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
+// Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
+// Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
