@@ -15,6 +15,8 @@
 @endif
 	<h2>画像登録画面</h2>
 	@if(isset($user->uploadimages))
+			<div class="row justify-content-center">
+    			<div class="col-md-10">
 	                <div class="form-group text-center">
 	                  <label for="profile_image">
 	                    <p class="mb-1">プロフィール画像</p>
@@ -22,9 +24,13 @@
 	                    
 	                  </label>
 	                </div>
+	                <div class="form-group text-center">
 	                			{!! Form::model($user, ['route' => ['image.delete', $user->uploadimages->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::submit('画像を削除', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
+                            </div>
+                </div>
+            </div>
 	                
 	@else
 		<form method="post" action="{{ route('upload_image') }}" enctype="multipart/form-data">
