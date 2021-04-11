@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\UploadImage;
 use App\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class UploadImageController extends Controller
 {
@@ -43,6 +45,22 @@ class UploadImageController extends Controller
         }
         
         
+        return redirect("/");
+    }
+    
+    public function destroy($id)
+    {
+        $deletePictures = UploadImage::find($id);
+        $deleteName = $deletePictures->file_path;
+        
+        DB::beginTransaction();
+        $deletePictures->delete();
+        try {
+            Storage::delete('public/' . $deleteName);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+        }
         return redirect("/");
     }
 }

@@ -22,6 +22,10 @@
 	                    
 	                  </label>
 	                </div>
+	                			{!! Form::model($user, ['route' => ['image.delete', $user->uploadimages->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+	                
 	@else
 		<form method="post" action="{{ route('upload_image') }}" enctype="multipart/form-data">
 		

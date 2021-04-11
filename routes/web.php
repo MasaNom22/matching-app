@@ -21,10 +21,14 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 // ゲストユーザーログイン
 Route::get('guest', 'Auth\LoginController@guestLogin')->name('login.guest');
 
-//画像投稿画面
-Route::get('/form/{id}', 'UploadImageController@show')->name("upload_form");
-//画像アップロード
-Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
+Route::group(['middleware' => 'auth'], function () {
+    //画像投稿画面
+    Route::get('/form/{id}', 'UploadImageController@show')->name("upload_form");
+    //画像アップロード
+    Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
+    //画像削除
+    Route::delete('/delete/{id}', 'UploadImageController@destroy')->name("image.delete");
+});
 //ユーザー関係
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //ユーザー一覧画面
