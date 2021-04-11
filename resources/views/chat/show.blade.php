@@ -6,7 +6,7 @@
   <header class="header">
   <a href="{{route('articles.index')}}" class="linkToMatching"></a>
     <div class="chatPartner">
-      <div class="chatPartner_img"><img src="/storage/images/{{$chat_room_user -> img_name}}"></div>
+      <div class="chatPartner_img"><img src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;"　alt="写真"></div>
       <div class="chatPartner_name">{{ $chat_room_user -> name }}</div>
     </div>
   </header>
