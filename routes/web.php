@@ -78,10 +78,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/likes/index', 'LikeController@index')->name('likes.index');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('chat', 'ChatController@show')->name('chat.show');
-    Route::get('chat', 'ChatController@show')->name('chat.index');
-});
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::post('chat', 'ChatController@show')->name('chat.show');
+//     Route::get('chat', 'ChatController@show')->name('chat.index');
+// });
 
+Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
+    Route::post('show', 'ChatController@show')->name('chat.show');
+    Route::post('chat', 'ChatController@chat')->name('chat.chat');
+});
 // Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
 // Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
