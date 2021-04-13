@@ -69,7 +69,7 @@ class ChatController extends Controller
     public static function show(Request $request)
     {
         $matching_user_id = $request->user_id;
-    
+        
         // 自分の持っているチャットルームを取得
         $current_user_chat_rooms = ChatRoomUser::where('user_id', Auth::id())
     ->pluck('chat_room_id');
@@ -110,7 +110,7 @@ class ChatController extends Controller
 
         // チャット相手のユーザー名を取得(JS用)
         $chat_room_user_name = $chat_room_user->name;
-
+        
         $chat_messages = ChatMessage::where('chat_room_id', $chat_room_id)
     ->orderby('created_at')
     ->get();

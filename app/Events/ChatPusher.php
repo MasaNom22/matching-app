@@ -2,11 +2,6 @@
 
 namespace App\Events;
 
-use App\ChatRoom;
-use App\ChatRoomUser;
-use App\ChatMessage;
-use App\User;
-
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,7 +14,7 @@ class ChatPusher implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     
-    public $message; 
+    public $message;
 
     /**
      * Create a new event instance.
@@ -38,6 +33,6 @@ class ChatPusher implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('ChatRoomChannel');
+        return new Channel('ChatRoomChannel');
     }
 }
