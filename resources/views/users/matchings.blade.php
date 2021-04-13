@@ -17,11 +17,11 @@
             @else
             <i class="fas fa-user-circle fa-9x mr-1"></i>
             @endif
-            <form method="POST" action="{{ route('chat.show') }}">
-            @csrf
-              <input name="user_id" type="hidden" value="{{$user->id}}">
-              <button type="submit" class="btn btn-primary">チャットを開く</button>
-            </form>
+            <!--<form method="POST" action="{{ route('chat.show') }}">-->
+            <!--@csrf-->
+            <!--  <input name="user_id" type="hidden" value="{{$user->id}}">-->
+            <!--  <button type="submit" class="btn btn-primary">チャットを開く</button>-->
+            <!--</form>-->
             
         </div>
         @endif
