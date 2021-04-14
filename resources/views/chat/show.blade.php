@@ -50,11 +50,11 @@
               @endforeach
             </div>
             <form class="messageInputForm" style="text-align:center">
-            <div class='container'>
-              <input type="text" data-behavior="chat_message" class="messageInputForm_input" style="width:50%;" placeholder="メッセージを入力... (Enter key please)">
-              <i class="fas fa-paper-plane fa-x "></i>
-            </div>
-          </form>
+              <div class='container'>
+                <input type="text" data-behavior="chat_message" class="messageInputForm_input" style="width:50%;" placeholder="メッセージを入力... (Enter key please)">
+                <i class="fas fa-paper-plane fa-x "></i>
+              </div>
+            </form>
           </div>
       </div>
     </div>
