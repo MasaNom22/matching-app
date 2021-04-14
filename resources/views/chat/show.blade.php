@@ -8,13 +8,19 @@
   <div class="row justify-content-center">
     <div class="col-md-10">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="text-align:center">
+          　@if(isset(Auth::user()->uploadimages))
+            <img src="{{ Storage::url(Auth::user()->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">
+            @else
+            <i class="fas fa-user-circle fa-3x mr-1"></i>
+            @endif
+            {{Auth::user()->name}}さんと
             @if(isset($chat_room_user->uploadimages))
             <img src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;"　alt="写真">
             @else
             <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
-            {{ $chat_room_user -> name }}さん
+            {{ $chat_room_user -> name }}さんのチャットルーム
         </div>
           <div class="card-body">
             <div class="messagesArea messages">
