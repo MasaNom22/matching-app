@@ -23,7 +23,7 @@
 </head>
 <body>
     {{-- ナビゲーションバー --}}
-    @include('commons.navbar')
+    @include('commons.navbar1')
 
     @yield('content')
 
