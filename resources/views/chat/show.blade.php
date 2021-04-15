@@ -10,13 +10,13 @@
       <div class="card">
         <div class="card-header" style="text-align:center">
           　@if(isset(Auth::user()->uploadimages))
-            <img src="{{ Storage::url(Auth::user()->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">
+            <img class="user-icon rounded-circle" src="{{ Storage::url(Auth::user()->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">
             @else
             <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
             {{Auth::user()->name}}さんと
             @if(isset($chat_room_user->uploadimages))
-            <img src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;"　alt="写真">
+            <img class="user-icon rounded-circle" src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;"　alt="写真">
             @else
             <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
@@ -29,7 +29,7 @@
                   <div class="" style="text-align:left">
                     <p>
                       @if(isset(Auth::user()->uploadimages))
-                      <img src="{{ Storage::url(Auth::user()->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">
+                      <img class="user-icon rounded-circle" src="{{ Storage::url(Auth::user()->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">
                       @else
                       <i class="fas fa-user-circle fa-3x mr-1"></i>
                       @endif
@@ -40,7 +40,7 @@
                     <div class="" style="text-align:right">
                       <p>
                         @if(isset($chat_room_user->uploadimages))
-                        <img src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">　{{$chat_room_user_name}}さん</p>
+                        <img class="user-icon rounded-circle" src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">　{{$chat_room_user_name}}さん</p>
                         @else
                         <i class="fas fa-user-circle fa-3x mr-1"></i>
                         @endif
