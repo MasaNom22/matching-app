@@ -14,8 +14,10 @@
                     <li class="nav-item">
                         <span class="nav-link">ようこそ、 {{ Auth::user()->name }}さん</span>
                     </li>
-                    {{-- ユーザ登録ページへのリンク --}}
-                    <li class="nav-item"></li>
+                    {{-- チャットページへのリンク --}}
+                    <li class="nav-item">
+                         <a class="nav-link" href="{{ route('users.matchs', ['user' => Auth::user()]) }}"><i class="fas fa-bell mr-1"></i>チャットする</a>
+                    </li>
                     {{-- 画像投稿ページへのリンク --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('upload_form', ['id' => Auth::id()]) }}"><i class="fas fa-arrow-alt-circle-down mr-1"></i>写真投稿</a>
