@@ -33,13 +33,13 @@ $(document).ready(function() {
             console.log(true);
         $('.messages').append(
             '<div class="message"><span>' + current_user_name + 
-            'さん</span><div class="commonMessage"><div>' +
+            '</span><div class="commonMessage"><div>' +
             e.message.message + '</div></div></div>');
         }else{
             console.log(false);
         $('.messages').append(
             '<div class="message"><span>' + chat_room_user_name + 
-            'さん</span><div class="commonMessage"><div>' +
+            '</span><div class="commonMessage"><div>' +
             e.message.message + '</div></div></div>');    
         }
     });

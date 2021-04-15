@@ -14,13 +14,13 @@
             @else
             <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
-            {{Auth::user()->name}}さんと
+            {{Auth::user()->name}}と
             @if(isset($chat_room_user->uploadimages))
             <img class="user-icon rounded-circle" src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;"　alt="写真">
             @else
             <i class="fas fa-user-circle fa-3x mr-1"></i>
             @endif
-            {{ $chat_room_user -> name }}さんのチャットルーム
+            {{ $chat_room_user -> name }}のチャットルーム
         </div>
           <div class="card-body">
             <div class="messagesArea messages">
@@ -33,14 +33,14 @@
                       @else
                       <i class="fas fa-user-circle fa-3x mr-1"></i>
                       @endif
-                      {{Auth::user()->name}}さん</p>
+                      {{Auth::user()->name}}</p>
                     <p>{{$message->message}}</p>
                   </div>
                   @else
                     <div class="" style="text-align:right">
                       <p>
                         @if(isset($chat_room_user->uploadimages))
-                        <img class="user-icon rounded-circle" src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">　{{$chat_room_user_name}}さん</p>
+                        <img class="user-icon rounded-circle" src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;" class="iconImgTalk" alt="写真">　{{$chat_room_user_name}}</p>
                         @else
                         <i class="fas fa-user-circle fa-3x mr-1"></i>
                         @endif
