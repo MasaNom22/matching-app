@@ -18,7 +18,7 @@
             @if(isset($chat_room_user->uploadimages))
             <img class="user-icon rounded-circle" src="{{ Storage::url($chat_room_user->uploadimages->file_path) }}" style="width:10%;"　alt="写真">
             @else
-            <i class="fas fa-user-circle fa-3x mr-1"></i>
+            <i class="fas fa-user-circle fa-3x "></i>
             @endif
             {{ $chat_room_user -> name }}のチャットルーム
         </div>
