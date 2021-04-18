@@ -19,7 +19,7 @@ class LikeController extends Controller
         // 認証済みユーザを取得
         $user = \Auth::user();
 
-        $articles = $user->likes()->orderBy('created_at', 'desc')->paginate(5);
+        $articles = $user->likes()->orderBy('created_at', 'desc')->paginate(5)->load(['likes','user']);
 
         return view('likes.index', [
             'articles' => $articles,

@@ -57,7 +57,8 @@ class UserController extends Controller
     {
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
-        $articles = Article::where('user_id', $id)->get();
+        
+        $articles = Article::where('user_id', $id)->get()->load(['likes','user']);
         // ユーザの投稿数を取得
         $user->loadCount('articles');
         // ユーザのフォロワーをカウント
