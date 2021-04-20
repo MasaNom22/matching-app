@@ -38,8 +38,8 @@ $(document).ready(function() {
         }else{
             console.log(false);
         $('.messages').append(
-            '<div class="message"><span>' + chat_room_user_name + 
-            '</span><div class="commonMessage"><div>' +
+            '<div class="message" style="text-align:right"><span>' + chat_room_user_name + 
+            '</span><div class="commonMessage"  style="text-align:right"><div>' +
             e.message.message + '</div></div></div>');    
         }
     });
