@@ -22,6 +22,10 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::get('guest', 'Auth\LoginController@guestLogin')->name('login.guest');
 
 Route::group(['middleware' => 'auth'], function () {
+    //投稿一覧画面表示
+    Route::get('/', 'ArticleController@index')->name('articles.index');
+    //いいねした記事を表示
+    Route::get('/likes/index', 'LikeController@index')->name('likes.index');
     //画像投稿画面
     Route::get('/form/{id}', 'UploadImageController@show')->name("upload_form");
     //画像アップロード
@@ -52,18 +56,20 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('/matching/{user}', 'UserController@follow_each')->name('users.matchs');
 });
 Route::group(['middleware' => 'auth'], function () {
-    //コメント表示画面
-    Route::get('/articles/show/{id}', 'ArticleController@show')->name('articles.show');
-    //コメント投稿画面表示
-    Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
-    //コメント投稿機能
-    Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
-    //コメント編集機能
-    Route::get('/articles/edit/{id}', 'ArticleController@edit')->name('articles.edit');
-    //ユーザー更新
-    Route::patch('/articles/update/{id}', 'ArticleController@update')->name('articles.update');
-    //コメント削除
-    Route::delete('/articles/{id}', 'ArticleController@destroy')->name("articles.destroy");
+    Route::prefix('articles')->name('articles.')->group(function () {
+        //コメント表示画面
+        Route::get('/show/{id}', 'ArticleController@show')->name('show');
+        //コメント投稿画面表示
+        Route::get('/create', 'ArticleController@create')->name('create');
+        //コメント投稿機能
+        Route::post('/store', 'ArticleController@store')->name('store');
+        //コメント編集機能
+        Route::get('/edit/{id}', 'ArticleController@edit')->name('edit');
+        //コメント更新
+        Route::patch('/update/{id}', 'ArticleController@update')->name('update');
+        //コメント削除
+        Route::delete('/{id}', 'ArticleController@destroy')->name('destroy');
+    });
 });
 //いいね・いいねを外すボタン
 Route::prefix('articles')->name('articles.')->group(function () {
@@ -71,21 +77,7 @@ Route::prefix('articles')->name('articles.')->group(function () {
     Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    //投稿一覧画面表示
-    Route::get('/', 'ArticleController@index')->name('articles.index');
-    //いいねした記事を表示
-    Route::get('/likes/index', 'LikeController@index')->name('likes.index');
-});
-
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::post('chat', 'ChatController@show')->name('chat.show');
-//     Route::get('chat', 'ChatController@show')->name('chat.index');
-// });
-
 Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::post('show', 'ChatController@show')->name('chat.show');
     Route::post('chat', 'ChatController@chat')->name('chat.chat');
 });
-// Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
-// Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
