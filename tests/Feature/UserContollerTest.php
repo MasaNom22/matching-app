@@ -48,4 +48,11 @@ class UserContollerTest extends TestCase
         $response->assertStatus(200)->assertViewIs('users.show');
         ;
     }
+    public function testGuestEdit()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->get(route('users.edit', ['user' => $user]));
+
+        $response->assertRedirect(route('login'));
+    }
 }
