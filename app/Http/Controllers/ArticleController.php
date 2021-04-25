@@ -63,9 +63,8 @@ class ArticleController extends Controller
         return view('articles.edit', ['article' => $article]);
     }
     
-    public function update($id, Request $request)
+    public function update(Article $article, Request $request)
     {
-        $article = Article::find($id);
         $request->validate([
             'body' => 'required',
         ]);

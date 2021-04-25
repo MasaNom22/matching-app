@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
         //コメント編集機能
         Route::get('/edit/{article}', 'ArticleController@edit')->name('edit');
         //コメント更新
-        Route::patch('/update/{id}', 'ArticleController@update')->name('update');
+        Route::patch('/update/{article}', 'ArticleController@update')->name('update');
         //コメント削除
         Route::delete('/{article}', 'ArticleController@destroy')->name('destroy');
     });
