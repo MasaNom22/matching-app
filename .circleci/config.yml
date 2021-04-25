@@ -1,38 +1,40 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+        environment:
+          - APP_DEBUG: true
+          - APP_ENV: testing
+          - DB_CONNECTION: mysql
+          - DB_DATABASE: testing
+          - DB_USERNAME: root
+ 
+      - image: circleci/mysql:5.7-ram
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
+          - MYSQL_DATABASE: testing
+ 
     steps:
       - checkout
-
+ 
+      - run: sudo apt update
+      - run: sudo docker-php-ext-install pdo_mysql
+ 
       - restore_cache:
-          key: composer-v2-{{ checksum "laravel/composer.lock" }}
-      - run:
-          working_directory: laravel
-          command: composer install -n --prefer-dist
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+ 
+      - run: composer install -n --prefer-dist
+ 
       - save_cache:
-          key: composer-v2-{{ checksum "laravel/composer.lock" }}
+          key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
-            - laravel/vendor
-
-      - restore_cache:
-          key: npm-v2-{{ checksum "laravel/package-lock.json" }}
-      - run:
-          working_directory: laravel
-          name: npm ci
-          command: |
-            if [ ! -d node_modules ]; then
-              npm ci
-            fi
-      - save_cache:
-          key: npm-v2-{{ checksum "laravel/package-lock.json" }}
-          paths:
-            - laravel/node_modules
-      - run:
-          working_directory: laravel
-          command: npm run dev
-      - run:
-          working_directory: laravel
-          name: php test
-          command: vendor/bin/phpunit
+            - ./vendor
+ 
+      - run: echo "APP_KEY=" > .env.testing
+      - run: php artisan key:generate
+      - run: php artisan migrate
+ 
+      - run: ./vendor/bin/phpunit
