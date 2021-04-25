@@ -11,19 +11,23 @@
           <div class="card-body">
 
             <div class="user-form my-4">
-              <form method="POST" action="/users/update/{{ $user->id }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
-                @if(isset($image))
+                
                 <div class="form-group text-center">
                   <label for="profile_image">
                     <p class="mb-1">プロフィール画像</p>
-                    <img class="profile-icon image-upload rounded-circle" src="{{ Storage::url($image->file_path) }}" style="width:90%;"　alt="プロフィール画像">
-                    
+                    @if(isset($user->uploadimages))
+                    <img class="profile-icon image-upload rounded-circle" src="{{ Storage::url($user->uploadimages->file_path) }}" style="width:90%;"　alt="プロフィール画像">
+                    @else
+                    <a href="{{ route('upload_form', ['id' => $user->id])}}" class="text-dark">
+                      <i class="fas fa-user-circle fa-9x mr-1"></i>
+                      <p class="mb-1">画像をアップロードする</p>
+                    </a>
+                    @endif
                   </label>
                 </div>
-                @else
-                @endif
                 <div class="form-group">
                   <label for="name">ユーザー名</label>
                     <input class="form-control" type="text" id="name" name="name" value="{{ $user->name ?? old('name') }}">

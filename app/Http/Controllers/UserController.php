@@ -13,10 +13,10 @@ use App\Tag;
 
 class UserController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(User::class, 'user');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -103,13 +103,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //ユーザーを特定
-        $user = User::find($id);
-        $user_id = $id;
-        //アップロードした画像を取得
-        $upload = UploadImage::find($user_id);
         //ユーザーの上書き
         $user->name = $request->name;
         $user->email = $request->email;
@@ -124,7 +119,6 @@ class UserController extends Controller
         
         return redirect()->route('users.show', [
             'user' => $user,
-            "image" => $upload,
             'id' => $user->id,
         ]);
     }
