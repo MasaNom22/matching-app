@@ -41,7 +41,7 @@ class UserContollerTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
-    public function testtAuthShow()
+    public function testAuthShow()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)

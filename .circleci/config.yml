@@ -32,7 +32,31 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
- 
+//追加
+ npm-ci:
+    steps:
+      - run:
+          name: npm CI
+          command: |
+            if [ ! -d node_modules ]; then
+              npm ci
+            fi
+  restore-cache-npm:
+    steps:
+      - restore_cache:
+          key: npm-cache-{{ checksum "package-lock.json" }}
+  npm-run-dev:
+    steps:
+      - run:
+          name: Run npm
+          command: npm run dev
+  save-cache-npm:
+    steps:
+      - save_cache:
+          key: npm-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+            
       - run: echo "APP_KEY=" > .env.testing
       - run: php artisan key:generate
       - run: php artisan migrate
