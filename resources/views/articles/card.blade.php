@@ -20,7 +20,7 @@
                       	          </a>
                     	         </h5>
                     	         <h6 class="font-weight-lighter">投稿日時: {{ $article->created_at->format('Y/m/d H:i') }}</h6>
-                                <a class="text-dark" href="{{ route('articles.show', ['id' => $article->id]) }}"><h4> {{ $article->body }}</h4></a>
+                                <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}"><h4> {{ $article->body }}</h4></a>
                     	  　  </div>
                 	  　      <!-- dropdown -->
                       	  　@if ($article->user_id == Auth::id())

@@ -24,7 +24,7 @@
                         <div class="d-flex">
                             <div>
                                 @if ($user->id === Auth::user()->id)
-                                    <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-primary">プロフィールを編集する</a>
+                                    <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary">プロフィールを編集する</a>
                                 @else
                                         <follow-button
                                           class="ml-auto"

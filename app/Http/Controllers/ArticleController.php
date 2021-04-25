@@ -29,10 +29,8 @@ class ArticleController extends Controller
         ]);
     }
     
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
-        // タスク一覧ビューでそれを表示
         return view('articles.show', [
             'article' => $article,
         ]);

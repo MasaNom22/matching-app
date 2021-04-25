@@ -40,7 +40,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //ユーザー詳細画面
     Route::get('show/{id}', 'UserController@show')->name('users.show');
     //ユーザー編集画面
-    Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
+    Route::get('edit/{user}', 'UserController@edit')->name('users.edit');
     //ユーザー更新
     Route::patch('update/{id}', 'UserController@update')->name('users.update');
     //ユーザーをフォロー
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('articles')->name('articles.')->group(function () {
         //コメント表示画面
-        Route::get('/show/{id}', 'ArticleController@show')->name('show');
+        Route::get('/show/{article}', 'ArticleController@show')->name('show');
         //コメント投稿画面表示
         Route::get('/create', 'ArticleController@create')->name('create');
         //コメント投稿機能

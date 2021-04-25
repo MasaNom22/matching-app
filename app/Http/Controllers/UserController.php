@@ -13,6 +13,10 @@ use App\Tag;
 
 class UserController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(User::class, 'user');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -80,12 +84,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
-        $user_id = $id;
         //アップロードした画像を取得
-        $upload = UploadImage::find($user_id);
+        $upload = UploadImage::find($user->id);
         $tagNames = $user->tags->map(function ($tag) {
             return ['text' => $tag->name];
         });
