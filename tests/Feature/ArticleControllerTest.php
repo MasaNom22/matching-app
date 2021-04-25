@@ -11,6 +11,7 @@ use Tests\TestCase;
 
 class ArticleControllerTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -22,7 +23,7 @@ class ArticleControllerTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
-    use DatabaseTransactions;
+    
     public function testAuthCreate()
     {
         $user = factory(User::class)->create();
@@ -41,7 +42,7 @@ class ArticleControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
     
-    use DatabaseTransactions;
+    
     public function testAuthIndex()
     {
         $user = factory(User::class)->create();
@@ -61,7 +62,7 @@ class ArticleControllerTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
-    use DatabaseTransactions;
+    
     public function testtAuthShow()
     {
         $user = factory(User::class)->create();

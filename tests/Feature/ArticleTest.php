@@ -17,7 +17,7 @@ class ArticleTest extends TestCase
      *
      * @return void
      */
-     use DatabaseTransactions;
+    use DatabaseTransactions;
     public function testIsLikedByNull()
     {
         $article = factory(Article::class)->create();
@@ -27,8 +27,8 @@ class ArticleTest extends TestCase
         $this->assertFalse($result);
     }
     
-     use DatabaseTransactions;
-     public function testIsLikedByTheUser()
+    use DatabaseTransactions;
+    public function testIsLikedByTheUser()
     {
         $article = factory(Article::class)->create();
         $user = factory(User::class)->create();

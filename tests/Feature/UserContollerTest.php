@@ -10,6 +10,7 @@ use Tests\TestCase;
 
 class UserContollerTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -21,7 +22,7 @@ class UserContollerTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
-    use DatabaseTransactions;
+    
     public function testAuthIndex()
     {
         $user = factory(User::class)->create();
