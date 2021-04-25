@@ -52,6 +52,15 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertViewIs('articles.index');
     }
+    
+    public function testGuestShow()
+    {
+        $user = factory(User::class)->create();
+        $article = factory(Article::class)->create();
+        $response = $this->get(route('articles.show', ['article' => $article]));
+
+        $response->assertRedirect(route('login'));
+    }
     use DatabaseTransactions;
     public function testtAuthShow()
     {
