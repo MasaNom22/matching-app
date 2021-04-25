@@ -64,11 +64,11 @@ Route::group(['middleware' => 'auth'], function () {
         //コメント投稿機能
         Route::post('/store', 'ArticleController@store')->name('store');
         //コメント編集機能
-        Route::get('/edit/{id}', 'ArticleController@edit')->name('edit');
+        Route::get('/edit/{article}', 'ArticleController@edit')->name('edit');
         //コメント更新
         Route::patch('/update/{id}', 'ArticleController@update')->name('update');
         //コメント削除
-        Route::delete('/{id}', 'ArticleController@destroy')->name('destroy');
+        Route::delete('/{article}', 'ArticleController@destroy')->name('destroy');
     });
 });
 //いいね・いいねを外すボタン

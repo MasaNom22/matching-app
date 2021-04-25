@@ -30,11 +30,11 @@
                                     <i class="fas fa-ellipsis-v fa-lg"></i>
                                   </a>
                                   <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('articles.edit', ['id' => $article->id]) }}">
+                                    <a class="dropdown-item" href="{{ route('articles.edit', ['article' => $article]) }}">
                                       <i class="fas fa-pen mr-1"></i>投稿を編集する
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    {!! Form::model($article, ['route' => ['articles.destroy', $article->id], 'method' => 'delete']) !!}
+                                    {!! Form::model($article, ['route' => ['articles.destroy', $article], 'method' => 'delete']) !!}
                                     {!! Form::submit('投稿を削除する', ['class' => 'dropdown-item text-danger ']) !!}
                                     {!! Form::close() !!}
                                   </div>

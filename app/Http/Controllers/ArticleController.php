@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Article::class, 'article');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
     
     public function index()
     {
@@ -58,13 +58,9 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
     
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::find($id);
-        
-        return view('articles.edit', [
-            'article' => $article,
-        ]);
+        return view('articles.edit', ['article' => $article]);
     }
     
     public function update($id, Request $request)
@@ -79,10 +75,9 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
     
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        $deleteArticle = Article::find($id);
-        $deleteArticle->delete();
+        $article->delete();
     
         return redirect()->route('articles.index');
     }
