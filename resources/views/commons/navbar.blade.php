@@ -33,7 +33,7 @@
                             {{-- ページへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.index', 'ユーザー一覧画面') !!}</li>
                             {{-- ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細画面', ['id' => Auth::id()]) !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細画面', ['user' => Auth::user()]) !!}</li>
                             {{-- ページへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.matchs', 'マッチング画面', ['user' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider"></li>

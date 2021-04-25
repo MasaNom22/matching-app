@@ -38,7 +38,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     //ユーザー一覧画面
     Route::get('index', 'UserController@index')->name('users.index');
     //ユーザー詳細画面
-    Route::get('show/{id}', 'UserController@show')->name('users.show');
+    Route::get('show/{user}', 'UserController@show')->name('users.show');
     //ユーザー編集画面
     Route::get('edit/{user}', 'UserController@edit')->name('users.edit');
     //ユーザー更新

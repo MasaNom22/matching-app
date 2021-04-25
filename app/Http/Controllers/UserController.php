@@ -57,12 +57,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        // idの値でユーザを検索して取得
-        $user = User::findOrFail($id);
-        
-        $articles = Article::where('user_id', $id)->get()->load(['likes','user']);
+        $articles = Article::where('user_id', $user->id)->get()->load(['likes','user']);
         // ユーザの投稿数を取得
         $user->loadCount('articles');
         // ユーザのフォロワーをカウント
