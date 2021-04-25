@@ -25,6 +25,7 @@ class UserContollerTest extends TestCase
     
     public function testAuthIndex()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)
