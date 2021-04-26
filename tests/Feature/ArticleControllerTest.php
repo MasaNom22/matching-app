@@ -12,28 +12,6 @@ use Tests\TestCase;
 class ArticleControllerTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testGuestCreate()
-    {
-        $response = $this->get(route('articles.create'));
-
-        $response->assertRedirect(route('login'));
-    }
-    
-    public function testAuthCreate()
-    {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)
-            ->get(route('articles.create'));
-
-        $response->assertStatus(200)
-            ->assertViewIs('articles.create');
-    }
     
     public function testGuestIndex()
     {
@@ -41,7 +19,6 @@ class ArticleControllerTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
-    
     
     public function testAuthIndex()
     {
@@ -74,6 +51,55 @@ class ArticleControllerTest extends TestCase
         ;
     }
     
+    public function testGuestCreate()
+    {
+        $response = $this->get(route('articles.create'));
+
+        $response->assertRedirect(route('login'));
+    }
+    
+    public function testAuthCreate()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)
+            ->get(route('articles.create'));
+
+        $response->assertStatus(200)
+            ->assertViewIs('articles.create')
+            ->assertSee('メッセージを投稿する');
+    }
+    
+    
+    public function testGuestStore()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->post(route('articles.store'));
+        $response->assertRedirect('login');
+    }
+    
+    public function testAuthStore()
+    {
+        $user = factory(User::class)->create();
+        $user_id = $user->id;
+        $body ='テスト本文';
+
+        $response = $this->actingAs($user)
+        ->post(route(
+            'articles.store',
+            [
+            'body' => $body,
+            'user_id' => $user_id,
+            ]
+        ));
+        $response->assertRedirect(route('articles.index'));
+        //登録したデータが存在するかどうか
+        $this->assertDatabaseHas('articles', [
+            'body' => $body,
+            'user_id' => $user_id
+        ]);
+    }
+    
     public function testGuestEdit()
     {
         $article = factory(Article::class)->create();
@@ -90,8 +116,8 @@ class ArticleControllerTest extends TestCase
         $response = $this->actingAs($user)
         ->get(route('articles.edit', ['article' => $article]));
 
-        $response->assertStatus(200)->assertViewIs('articles.edit');
-        ;
+        $response->assertStatus(200)->assertViewIs('articles.edit')
+        ->assertSee('コメント編集');
     }
     //他人の記事を編集出来ないことを確認
     public function testAuthPolicyEdit()
