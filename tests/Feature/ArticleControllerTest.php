@@ -63,7 +63,7 @@ class ArticleControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
     
-    public function testtAuthShow()
+    public function testAuthShow()
     {
         $user = factory(User::class)->create();
         $article = factory(Article::class)->create();
@@ -72,5 +72,64 @@ class ArticleControllerTest extends TestCase
 
         $response->assertStatus(200)->assertViewIs('articles.show');
         ;
+    }
+    
+    public function testGuestEdit()
+    {
+        $article = factory(Article::class)->create();
+        $user = $article->user;
+        $response = $this->get(route('articles.edit', ['article' => $article]));
+
+        $response->assertRedirect(route('login'));
+    }
+    
+    public function testAuthEdit()
+    {
+        $article = factory(Article::class)->create();
+        $user = $article->user;
+        $response = $this->actingAs($user)
+        ->get(route('articles.edit', ['article' => $article]));
+
+        $response->assertStatus(200)->assertViewIs('articles.edit');
+        ;
+    }
+    //他人の記事を編集出来ないことを確認
+    public function testAuthPolicyEdit()
+    {
+        $user = factory(User::class)->create();
+        $article = factory(Article::class)->create();
+        $user1 = $article->user;
+        $response = $this->actingAs($user)
+        ->get(route('articles.edit', ['article' => $article]));
+
+        $response->assertStatus(403);
+    }
+    public function testGuestDelete()
+    {
+        $article = factory(Article::class)->create();
+        $user = $article->user;
+        $response = $this->delete(route('articles.destroy', ['article' => $article]));
+
+        $response->assertRedirect(route('login'));
+    }
+    public function testAuthDelete()
+    {
+        $article = factory(Article::class)->create();
+        $user = $article->user;
+        $response = $this->actingAs($user)
+        ->delete(route('articles.destroy', ['article' => $article]));
+
+        $response->assertRedirect(route('articles.index'));
+    }
+    //他人の記事を削除出来ないことを確認
+    public function testAuthPolicyDelete()
+    {
+        $user = factory(User::class)->create();
+        $article = factory(Article::class)->create();
+        $user1 = $article->user;
+        $response = $this->actingAs($user)
+        ->delete(route('articles.destroy', ['article' => $article]));
+
+        $response->assertStatus(403);
     }
 }

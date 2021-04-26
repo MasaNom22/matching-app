@@ -12,12 +12,12 @@ use Tests\TestCase;
 
 class ArticleTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    use DatabaseTransactions;
     public function testIsLikedByNull()
     {
         $article = factory(Article::class)->create();
@@ -27,7 +27,6 @@ class ArticleTest extends TestCase
         $this->assertFalse($result);
     }
     
-    use DatabaseTransactions;
     public function testIsLikedByTheUser()
     {
         $article = factory(Article::class)->create();
@@ -39,7 +38,6 @@ class ArticleTest extends TestCase
         $this->assertTrue($result);
     }
     
-    use DatabaseTransactions;
     public function testIsLikedByAnother()
     {
         $article = factory(Article::class)->create();
