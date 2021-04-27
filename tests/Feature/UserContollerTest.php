@@ -28,7 +28,8 @@ class UserContollerTest extends TestCase
             ->get(route('users.index'));
 
         $response->assertStatus(200)
-            ->assertViewIs('users.index');
+            ->assertViewIs('users.index')
+            ->assertSee('ユーザー一覧');
     }
     
     public function testGuestShow()

@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     //いいねした記事を表示
     Route::get('/likes/index', 'LikeController@index')->name('likes.index');
     //画像投稿画面
-    Route::get('/form/{id}', 'UploadImageController@show')->name("upload_form");
+    Route::get('/form', 'UploadImageController@show')->name("upload_form");
     //画像アップロード
     Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
     //画像削除

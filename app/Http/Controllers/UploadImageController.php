@@ -8,14 +8,14 @@ use App\UploadImage;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UploadImageController extends Controller
 {
-    public function show($id)
+    public function show()
     {
-        $user=User::find($id);
-        $user_id = $id;
-        $upload = UploadImage::find($user_id);
+        $user=Auth::user();
+        $upload = UploadImage::where('user_id', $user->id);
         return view("upload_form", [
             "user" => $user,
             "image" => $upload,
