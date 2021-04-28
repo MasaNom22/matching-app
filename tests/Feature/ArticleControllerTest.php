@@ -28,7 +28,8 @@ class ArticleControllerTest extends TestCase
             ->get(route('articles.index'));
 
         $response->assertStatus(200)
-            ->assertViewIs('articles.index');
+            ->assertViewIs('articles.index')
+            ->assertSee('マッチング画面へ');
     }
     
     public function testGuestShow()
