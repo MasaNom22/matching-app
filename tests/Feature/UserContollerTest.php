@@ -78,4 +78,41 @@ class UserContollerTest extends TestCase
 
         $response->assertStatus(403);
     }
+    
+    public function testGuestfolowings()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->get(route('users.followings', ['id' => $user->id]));
+
+        $response->assertRedirect(route('login'));
+    }
+    
+    public function testAuthfolowings()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->
+        get(route('users.followings', ['id' => $user->id]));
+
+        $response->assertStatus(200)->assertViewIs('users.followings')
+        ->assertSee('フォローユーザー一覧画面');
+        ;
+    }
+    
+    public function testGuestfolowers()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->get(route('users.followers', ['id' => $user->id]));
+
+        $response->assertRedirect(route('login'));
+    }
+    
+    public function testAuthfolowers()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->
+        get(route('users.followers', ['id' => $user->id]));
+        
+        $response->assertStatus(200)->assertViewIs('users.followers')
+        ->assertSee('フォロワー一覧画面');
+    }
 }
