@@ -118,7 +118,7 @@ class ArticleControllerTest extends TestCase
         ->get(route('articles.edit', ['article' => $article]));
 
         $response->assertStatus(200)->assertViewIs('articles.edit')
-        ->assertSee('コメント編集');
+        ->assertSee($article->body);
     }
     //他人の記事を編集出来ないことを確認
     public function testAuthPolicyEdit()
@@ -144,9 +144,11 @@ class ArticleControllerTest extends TestCase
         $article = factory(Article::class)->create();
         $user = $article->user;
         $response = $this->actingAs($user)
-        ->delete(route('articles.destroy', ['article' => $article]));
-
-        $response->assertRedirect(route('articles.index'));
+        ->delete(route('articles.destroy', ['article' => $article]))
+        ->assertStatus(302)
+        ->assertRedirect(route('articles.index'));
+        
+        $this->assertDatabaseMissing('articles', [ 'body' => $article->body]);
     }
     //他人の記事を削除出来ないことを確認
     public function testAuthPolicyDelete()

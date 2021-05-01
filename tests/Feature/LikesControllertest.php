@@ -21,12 +21,15 @@ class LikesControllertest extends TestCase
     
     public function testAuthIndex()
     {
+        $article = factory(Article::class)->create();
         $user = factory(User::class)->create();
+        $article->likes()->attach($user);
 
         $response = $this->actingAs($user)
             ->get(route('likes.index'));
 
         $response->assertStatus(200)
-            ->assertViewIs('articles.index');
+            ->assertViewIs('likes.index')
+            ->assertSee($article->body);
     }
 }
