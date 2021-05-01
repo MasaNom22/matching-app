@@ -98,7 +98,7 @@ class UserContollerTest extends TestCase
         ;
     }
     
-    public function testGuestfolowers()
+    public function testGuestfollowers()
     {
         $user = factory(User::class)->create();
         $response = $this->get(route('users.followers', ['id' => $user->id]));
@@ -106,13 +106,88 @@ class UserContollerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
     
-    public function testAuthfolowers()
+    public function testAuthfollowers()
     {
+        $user1 = factory(User::class)->create();
         $user = factory(User::class)->create();
+        $user1->followings()->attach($user);
         $response = $this->actingAs($user)->
         get(route('users.followers', ['id' => $user->id]));
         
         $response->assertStatus(200)->assertViewIs('users.followers')
-        ->assertSee('フォロワー一覧画面');
+        ->assertSee($user1->name);
+    }
+    //アンフォローできるか
+    public function testAuthUnfollowers()
+    {
+        $user1 = factory(User::class)->create();
+        $user = factory(User::class)->create();
+        $user1->followings()->attach($user);
+        //フォローを外す
+        $user1->followings()->detach($user);
+        $response = $this->actingAs($user)->
+        get(route('users.followers', ['id' => $user->id]));
+        
+        $response->assertStatus(200)->assertViewIs('users.followers')
+        ->assertDontSee($user1->name);
+    }
+    
+    public function testGuestfollowings()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->get(route('users.followers', ['id' => $user->id]));
+
+        $response->assertRedirect(route('login'));
+    }
+    
+    public function testAuthfollowings()
+    {
+        $user1 = factory(User::class)->create();
+        $user = factory(User::class)->create();
+        $user->followings()->attach($user1);
+        $response = $this->actingAs($user)->
+        get(route('users.followings', ['id' => $user->id]));
+        
+        $response->assertStatus(200)->assertViewIs('users.followings')
+        ->assertSee('フォローユーザー一覧画面')
+        ->assertSee($user1->name);
+    }
+    
+    public function testAuthunfollowings()
+    {
+        $user1 = factory(User::class)->create();
+        $user = factory(User::class)->create();
+        $user->followings()->attach($user1);
+        //フォローを外す
+        $user->followings()->detach($user1);
+        $response = $this->actingAs($user)
+        ->get(route('users.followings', ['id' => $user->id]));
+        
+        $response->assertStatus(200)->assertViewIs('users.followings')
+        ->assertSee('フォローユーザー一覧画面')
+        ->assertDontSee($user1->name);
+    }
+    
+    public function testGuestMatching()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->get(route('users.matchs', ['user' => $user]));
+
+        $response->assertRedirect(route('login'));
+    }
+    
+    public function testAuthMatching()
+    {
+        $user1 = factory(User::class)->create();
+        $user = factory(User::class)->create();
+        //相互フォロー
+        $user->followings()->attach($user1);
+        $user1->followings()->attach($user);
+        $response = $this->actingAs($user)
+        ->get(route('users.matchs', ['user' => $user]));
+
+        $response->assertStatus(200)->assertViewIs('users.matchings')
+        ->assertSee('マッチングユーザー一覧画面')
+        ->assertSee($user->name);
     }
 }
