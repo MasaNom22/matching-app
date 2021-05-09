@@ -49,4 +49,11 @@ class ArticleTest extends TestCase
 
         $this->assertFalse($result);
     }
+
+    function testUserRelation ()
+    {
+        $article = factory(Article::class)->create();
+
+        $this->assertInstanceOf(User::class, $article->user);
+    }
 }
