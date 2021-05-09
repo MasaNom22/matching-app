@@ -195,7 +195,7 @@ class User extends Authenticatable
 
     public function chatRoomUsers()
     {
-        return $this->hasMany('App\ChatRoomUsers');
+        return $this->hasMany('App\ChatRoomUser');
     }
     
     public function tags(): BelongsToMany

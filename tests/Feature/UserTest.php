@@ -51,4 +51,18 @@ class UserTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $user->articles);
     }
+
+    function testChatMessageRelation ()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertInstanceOf(Collection::class, $user->ChatMessages);
+    }
+
+    function testChatRoomUsersRelation ()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertInstanceOf(Collection::class, $user->ChatRoomUsers);
+    }
 }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Article;
 use App\User;
+use App\ChatRoomUser;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
