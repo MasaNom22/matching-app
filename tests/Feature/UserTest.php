@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Support\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -42,5 +43,12 @@ class UserTest extends TestCase
         $result = $user->isFollowedBy($user1);
 
         $this->assertFalse($result);
+    }
+
+    function testArticleRelation ()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertInstanceOf(Collection::class, $user->articles);
     }
 }
