@@ -22,7 +22,7 @@
         <div id="app"> 
             {{-- ナビゲーションバー --}}
             @include('commons.navbar')
- 
+
 
 
             {{-- エラーメッセージ --}}

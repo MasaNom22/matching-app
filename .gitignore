@@ -16,3 +16,4 @@ npm-debug.log
 yarn-error.log
 /public/0.js
 /public/1.js
+/coverage
