@@ -81,3 +81,6 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::post('show', 'ChatController@show')->name('chat.show');
     Route::post('chat', 'ChatController@chat')->name('chat.chat');
 });
+
+//csvDownload
+Route::get('articles/download_csv', 'ArticleController@download_csv')->name('articles.CsvDownload');
