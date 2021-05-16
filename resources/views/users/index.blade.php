@@ -4,7 +4,18 @@
 
 @section('content')
 <h2>ユーザー一覧画面</h2>
-
+<div class="list-group col-md-4">
+<h4>検索条件を入力してください</h4>
+            <form action="{{ url('/users/index')}}" method="get" class="">
+              {{ csrf_field()}}
+              {{method_field('get')}}
+                <div class="form-group">
+                    <label>名前</label>                    
+                    <input type="text" class="form-control" placeholder="検索したい名前を入力してください" name="name" value="">
+                </div>
+                <button type="submit" class="btn btn-primary col-md-4">検索</button>
+            </form>
+          </div>
 <div class=container>
     <div class=row>
         @foreach($users as $user)

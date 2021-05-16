@@ -22,9 +22,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->input('name');
+        
         $users=User::All();
+        if (!empty($keyword)) {
+            $users= User::where('name', 'like', '%'.$keyword.'%')->get();
+        }
         return view('users.index', [
             "users" => $users,
             ]);
