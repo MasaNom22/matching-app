@@ -84,3 +84,12 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
 
 //csvDownload
 Route::get('articles/download_csv', 'ArticleController@download_csv')->name('articles.CsvDownload');
+
+// お問い合わせ入力ページ
+Route::get('/contacts', 'ContactController@index')->name('contacts.index');
+// 確認ページ
+Route::post('/contacts/confirm', 'ContactController@confirm')->name('contacts.confirm');
+// DB挿入、メール送信
+Route::post('/contacts/process', 'ContactController@process')->name('contacts.process');
+// 完了ページ
+Route::get('/contacts/complete', 'ContactsController@complete')->name('contacts.complete');

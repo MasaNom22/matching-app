@@ -22,7 +22,7 @@
 	        <h5>年齢: {{ Auth::user()->age }}</h5>
 	        <h5>性別: {{ Auth::user()->gender_label }}</h5>
 	        <a href="{{ route('users.matchs', ['user' => Auth::user()]) }}" class="btn btn-primary text-center aqua-gradient text-white">マッチング画面へ</a>
-          <a class="btn btn-primary" href={!! route('articles.CsvDownload') !!}>投稿一覧CSV出力</a>
+          <a class="btn btn-primary aqua-gradient" href={!! route('articles.CsvDownload') !!}>投稿一覧CSV出力</a>
         </div>
       </aside>
       <main class="col-md-7 offset-md-5">

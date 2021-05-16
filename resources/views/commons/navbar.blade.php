@@ -16,7 +16,7 @@
                     </li>
                     {{-- チャットページへのリンク --}}
                     <li class="nav-item">
-                         <a class="nav-link" href="{{ route('users.matchs', ['user' => Auth::user()]) }}"><i class="fas fa-bell mr-1"></i>チャットする</a>
+                        <a class="nav-link" href="{{ route('users.matchs', ['user' => Auth::user()]) }}"><i class="fas fa-bell mr-1"></i>チャットする</a>
                     </li>
                     {{-- 画像投稿ページへのリンク --}}
                     <li class="nav-item">
@@ -36,6 +36,9 @@
                             <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細画面', ['user' => Auth::user()]) !!}</li>
                             {{-- ページへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.matchs', 'マッチング画面', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-divider"></li>
+                            {{-- ページへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('contacts.index', 'お問い合わせ画面') !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
