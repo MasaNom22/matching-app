@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -32,6 +32,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload', 'UploadImageController@upload')->name("upload_image");
     //画像削除
     Route::delete('/delete/{id}', 'UploadImageController@destroy')->name("image.delete");
+    // お問い合わせ入力ページ
+    Route::get('/contacts', 'ContactController@index')->name('contacts.index');
+    // 確認ページ
+    Route::post('/contacts/confirm', 'ContactController@confirm')->name('contacts.confirm');
+    // DB挿入、メール送信
+    Route::post('/contacts/process', 'ContactController@process')->name('contacts.process');
+    // 完了ページ
+    Route::get('/contacts/complete', 'ContactsController@complete')->name('contacts.complete');
 });
 //ユーザー関係
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
@@ -69,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('/update/{article}', 'ArticleController@update')->name('update');
         //コメント削除
         Route::delete('/{article}', 'ArticleController@destroy')->name('destroy');
+        //csvDownload
+        Route::get('/download_csv', 'ArticleController@download_csv')->name('CsvDownload');
     });
 });
 //いいね・いいねを外すボタン
@@ -81,15 +91,3 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::post('show', 'ChatController@show')->name('chat.show');
     Route::post('chat', 'ChatController@chat')->name('chat.chat');
 });
-
-//csvDownload
-Route::get('articles/download_csv', 'ArticleController@download_csv')->name('articles.CsvDownload');
-
-// お問い合わせ入力ページ
-Route::get('/contacts', 'ContactController@index')->name('contacts.index');
-// 確認ページ
-Route::post('/contacts/confirm', 'ContactController@confirm')->name('contacts.confirm');
-// DB挿入、メール送信
-Route::post('/contacts/process', 'ContactController@process')->name('contacts.process');
-// 完了ページ
-Route::get('/contacts/complete', 'ContactsController@complete')->name('contacts.complete');
