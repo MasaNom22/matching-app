@@ -49,7 +49,7 @@ class ArticleControllerTest extends TestCase
         ->get(route('articles.show', ['article' => $article]));
 
         $response->assertStatus(200)->assertViewIs('articles.show');
-        ;
+        
     }
     
     public function testGuestCreate()
