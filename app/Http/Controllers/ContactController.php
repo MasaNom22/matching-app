@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Contact;
@@ -15,28 +16,19 @@ class ContactController extends Controller
         return view('contacts.index');
     }
 
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
-        $request->validate([
-            'name'     => 'required|max:10',
-            'email'    => 'required|email',
-            'contents' => 'required',
-        ]);
+        
 
         $inputs = $request->all();
 
         return view('contacts.confirm', ['inputs' => $inputs]);
     }
 
-    public function process(Request $request)
+    public function process(ContactRequest $request)
     {
         
-        //バリデーションを実行（結果に問題があれば処理を中断してエラーを返す）
-        $request->validate([
-            'email' => 'required|email',
-            'name'     => 'required|max:10',
-            'contents' => 'required',
-        ]);
+        
 
         //フォームから受け取ったactionの値を取得
         $action = $request->input('action');

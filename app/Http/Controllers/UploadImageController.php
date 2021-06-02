@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\UploadImage;
 use App\User;
+use App\Http\Requests\UploadImageRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class UploadImageController extends Controller
             ]);
     }
     
-    public function upload(Request $request)
+    public function upload(UploadImageRequest $request)
     {
         $request->validate([
             'image' => 'required|file|image|mimes:png,jpeg',
