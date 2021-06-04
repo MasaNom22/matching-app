@@ -25,12 +25,7 @@ class UploadImageController extends Controller
     
     public function upload(UploadImageRequest $request)
     {
-        $request->validate([
-            'image' => 'required|file|image|mimes:png,jpeg',
-            
-        ]);
-        $upload_image = $request->file('image');
-        
+        $upload_image = $request->file('image');        
 
         if ($upload_image) {
             //アップロードされた画像を保存する
