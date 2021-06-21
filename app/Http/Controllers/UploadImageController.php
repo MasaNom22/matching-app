@@ -16,10 +16,10 @@ class UploadImageController extends Controller
     public function show()
     {
         $user=Auth::user();
-        $upload = UploadImage::where('user_id', $user->id);
+        $image = UploadImage::where('user_id', $user->id);
         return view("upload_form", [
             "user" => $user,
-            "image" => $upload,
+            "image" => $image,
             ]);
     }
     

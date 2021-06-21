@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
-
-use App\UploadImage;
-
-use App\User;
 use App\Article;
+use App\Http\Requests\UserRequest;
 use App\Tag;
+use App\UploadImage;
+use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -25,14 +23,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->input('name');
-        
-        $users=User::All();
+
+        $all_users = User::All();
         if (!empty($keyword)) {
-            $users= User::where('name', 'like', '%'.$keyword.'%')->get();
+            $all_users = User::where('name', 'like', '%' . $keyword . '%')->get();
         }
         return view('users.index', [
-            "users" => $users,
-            ]);
+            "users" => $all_users,
+        ]);
     }
 
     /**
@@ -43,14 +41,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $articles = Article::where('user_id', $user->id)->get()->load(['likes','user']);
+        $articles = Article::where('user_id', $user->id)->get()->load(['likes', 'user']);
         // ユーザの投稿数を取得
         $user->loadCount('articles');
-        // ユーザのフォロワーをカウント
+        // ユーザのフォロワーをカウントを取得
         $user->loadCount('followers');
         // ユーザのフォローユーザーを取得
         $user->loadCount('followings');
-        
 
         // ユーザ詳細ビューでそれを表示
         return view('users.show', [
@@ -67,15 +64,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //アップロードした画像を取得
-        $upload = UploadImage::find($user->id);
+
+        $image = UploadImage::find($user->id);
         $tagNames = $user->tags->map(function ($tag) {
             return ['text' => $tag->name];
         });
 
         return view('users.edit', [
             'user' => $user,
-            'image' => $upload,
+            'image' => $image,
             'tagNames' => $tagNames,
         ]);
     }
@@ -94,32 +91,19 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->age = $request->age;
         $user->save();
-        
+
         $user->tags()->detach();
         $request->tags->each(function ($tagName) use ($user) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $user->tags()->attach($tag);
         });
-        
+
         return redirect()->route('users.show', [
             'user' => $user,
             'id' => $user->id,
         ]);
     }
 
-
-    
-    //  public function follow($id)
-    // {
-    //     // 認証済みユーザ（閲覧者）が、 idのユーザをフォローする
-    //     \Auth::user()->follow($id);
-    //     // 前のURLへリダイレクトさせる
-    //     // return back();
-    //     $users=User::All();
-    //     return view('users.index', [
-    //         "users" => $users,
-    //         ]);
-    // }
     public function follow(Request $request, string $name)
     {
         $user = User::where('name', $name)->first();
@@ -133,22 +117,11 @@ class UserController extends Controller
 
         return ['id' => $user->id];
     }
-    // public function unfollow($id)
-    // {
-    //     // 認証済みユーザ（閲覧者）が、 idのユーザをアンフォローする
-    //     \Auth::user()->unfollow($id);
-    //     // 前のURLへリダイレクトさせる
-    //     // return back();
-    //     $users=User::All();
-    //     return view('users.index', [
-    //         "users" => $users,
-    //         ]);
-    // }
-    
+
     public function unfollow(Request $request, string $name)
     {
         $user = User::where('name', $name)->first();
-        
+
         if ($user->id === $request->user()->id) {
             return abort('404', 'Cannot follow yourself.');
         }
@@ -157,7 +130,7 @@ class UserController extends Controller
 
         return ['id' => $user->id];
     }
-    
+
     public function followings($id)
     {
         $user = User::findOrFail($id);
@@ -165,14 +138,13 @@ class UserController extends Controller
         $user->loadCount('followings');
         // ユーザのフォローユーザーを取得
         $followings = $user->followings()->get();
-        
 
         return view('users.followings', [
             'user' => $user,
             'users' => $followings,
         ]);
     }
-    
+
     public function followers($id)
     {
         $user = User::findOrFail($id);
@@ -187,27 +159,15 @@ class UserController extends Controller
             'users' => $followers,
         ]);
     }
-    
 
-    
     public function follow_each($id)
     {
-        $user=User::find($id);
-        $users=User::All();
+        $user = User::find($id);
+        $all_users = User::All();
         //相互フォロー中のユーザを返す
         return view('users.matchings', [
             'user' => $user,
-            "users" => $users,
+            "users" => $all_users,
         ]);
-    }
-    
-    public function chatRoomUsers()
-    {
-        return $this->hasMany('App\ChatRoomUsers');
-    }
-    
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 }
