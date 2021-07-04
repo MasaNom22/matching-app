@@ -18,6 +18,14 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+Route::prefix('login')->name('login.')->group(function () {
+    Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('{provider}');
+    Route::get('/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('{provider}.callback');
+});
+Route::prefix('register')->name('register.')->group(function () {
+    Route::get('/{provider}', 'Auth\RegisterController@showProviderUserRegistrationForm')->name('{provider}');
+    Route::post('/{provider}', 'Auth\RegisterController@registerProviderUser')->name('{provider}');
+});
 // ゲストユーザーログイン
 Route::get('guest', 'Auth\LoginController@guestLogin')->name('login.guest');
 
@@ -39,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     // DB挿入、メール送信
     Route::post('/contacts/process', 'ContactController@process')->name('contacts.process');
     // 完了ページ
-    Route::get('/contacts/complete', 'ContactsController@complete')->name('contacts.complete');
+    Route::get('/contacts/complete', 'ContactController@complete')->name('contacts.complete');
 });
 //ユーザー関係
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
@@ -91,3 +99,5 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::post('show', 'ChatController@show')->name('chat.show');
     Route::post('chat', 'ChatController@chat')->name('chat.chat');
 });
+
+Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
