@@ -23,7 +23,7 @@ class CreateLikesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
 
-            // user_idとmicroposts_idの組み合わせの重複を許さない
+            // user_idとarticle_idの組み合わせの重複を許さない
             $table->unique(['user_id', 'article_id']);
         });
     }
